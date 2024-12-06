@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const interviewRoutes = require('./routes/interview.routes.js');
 const teacherRoutes = require('./routes/teacher.routes.js');
-const motionRoutes = require('./routes/motion.routes.js');
+const lightRoutes = require('./routes/light.routes.js');
 require('dotenv').config();
 const cors = require("cors"); // Import cors
 
@@ -23,7 +23,7 @@ app.get('/', (req, res) => {
 // Routes
 app.use('/api/interview', interviewRoutes);
 app.use("/api/teacher", teacherRoutes);
-app.use('/api/motion', motionRoutes);
+app.use('/api/light', lightRoutes);
 
 // Server Start
 const PORT = process.env.PORT || 5020;
