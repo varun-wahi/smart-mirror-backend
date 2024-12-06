@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const interviewRoutes = require('./routes/interview.routes.js');
 const teacherRoutes = require('./routes/teacher.routes.js');
+const motionRoutes = require('./routes/motion.routes.js');
 require('dotenv').config();
 
 const app = express();
@@ -9,10 +10,18 @@ const app = express();
 // Middleware
 app.use(bodyParser.json());
 
-// Routes
+// Default Route to Check Server
+app.get('/', (req, res) => {
+    res.status(200).json({
+        success: true,
+        message: "Server is running successfully!"
+    });
+});
 
+// Routes
 app.use('/api/interview', interviewRoutes);
 app.use("/api/teacher", teacherRoutes);
+app.use('/api/motion', motionRoutes);
 
 // Server Start
 const PORT = process.env.PORT || 5020;
