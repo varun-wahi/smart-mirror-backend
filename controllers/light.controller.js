@@ -12,7 +12,7 @@ exports.startLightControl = (req, res) => {
     }
 
     // Start the light control script
-    lightProcess = exec('sudo node light_control.js', (error, stdout, stderr) => {
+    lightProcess = exec('sudo node scripts/light_control.js', (error, stdout, stderr) => {
         if (error) {
             console.error(`Error: ${error.message}`);
             lightProcess = null;
@@ -32,9 +32,10 @@ exports.startLightControl = (req, res) => {
 // Stop light control
 exports.stopLightControl = (req, res) => {
     if (!lightProcess) {
-        return res.status(400).json({
-            success: false,
-            message: "Light control is not running.",
+        // Return a success response even if the process is not running
+        return res.status(200).json({
+            success: true,
+            message: "Light control is not running, no action needed.",
         });
     }
 
