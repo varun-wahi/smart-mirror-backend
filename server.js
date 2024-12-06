@@ -4,11 +4,13 @@ const interviewRoutes = require('./routes/interview.routes.js');
 const teacherRoutes = require('./routes/teacher.routes.js');
 const motionRoutes = require('./routes/motion.routes.js');
 require('dotenv').config();
+const cors = require("cors"); // Import cors
 
 const app = express();
 
 // Middleware
 app.use(bodyParser.json());
+app.use(cors()); // Enable CORS for all routes
 
 // Default Route to Check Server
 app.get('/', (req, res) => {
