@@ -1,0 +1,373 @@
+{
+  "topic": "Computer Networks",
+  "questions": {
+    "easy": [
+      {
+        "id": "cn_e_1",
+        "question": "What is a computer network?",
+        "ideal_answer": "A computer network is a collection of interconnected devices (computers, printers, servers, etc.) that can communicate with each other and share resources like files, data, and hardware over a transmission medium such as cables or wireless signals.",
+        "keywords": ["computer network", "interconnected devices", "communication"]
+      },
+      {
+        "id": "cn_e_2",
+        "question": "What is an IP address?",
+        "ideal_answer": "An IP address (Internet Protocol address) is a unique numerical identifier assigned to each device connected to a network. It allows devices to locate and communicate with each other over the internet or local networks.",
+        "keywords": ["IP address", "identifier", "network communication"]
+      },
+      {
+        "id": "cn_e_3",
+        "question": "What is DNS?",
+        "ideal_answer": "DNS (Domain Name System) is a system that translates human-readable domain names (like www.example.com) into IP addresses that computers use to identify each other on the network.",
+        "keywords": ["DNS", "domain name", "IP address", "network"]
+      },
+      {
+        "id": "cn_e_4",
+        "question": "What is the purpose of a router?",
+        "ideal_answer": "A router is a device that forwards data packets between computer networks. It determines the best path for the data to travel from the source to the destination, typically across different networks.",
+        "keywords": ["router", "data packets", "network"]
+      },
+      {
+        "id": "cn_e_5",
+        "question": "What is the difference between IPv4 and IPv6?",
+        "ideal_answer": "IPv4 (Internet Protocol version 4) uses 32-bit addresses, providing approximately 4.3 billion unique IP addresses. IPv6 uses 128-bit addresses, offering a vastly larger address space (approximately 340 undecillion unique addresses), addressing the limitations of IPv4.",
+        "keywords": ["IPv4", "IPv6", "IP address", "addressing"]
+      },
+      {
+        "id": "cn_e_6",
+        "question": "What is a MAC address?",
+        "ideal_answer": "A MAC (Media Access Control) address is a unique identifier assigned to a network interface card (NIC) for communication within a local network. It is used to ensure data is delivered to the correct device within the network.",
+        "keywords": ["MAC address", "unique identifier", "NIC"]
+      },
+      {
+        "id": "cn_e_7",
+        "question": "What is a switch in networking?",
+        "ideal_answer": "A switch is a network device that connects multiple devices within a local area network (LAN) and uses MAC addresses to forward data to the correct destination device. Unlike a hub, a switch only sends data to the specific device it’s intended for, improving network efficiency.",
+        "keywords": ["switch", "LAN", "data forwarding", "MAC address"]
+      },
+      {
+        "id": "cn_e_8",
+        "question": "What is the difference between a hub and a switch?",
+        "ideal_answer": "A hub is a simple device that broadcasts data to all devices connected to it, leading to inefficient use of bandwidth. A switch, however, sends data only to the specific device it’s intended for, improving network performance and efficiency.",
+        "keywords": ["hub", "switch", "network", "data transmission"]
+      },
+      {
+        "id": "cn_e_9",
+        "question": "What is a firewall?",
+        "ideal_answer": "A firewall is a network security system that monitors and controls incoming and outgoing network traffic based on predetermined security rules. It acts as a barrier between trusted and untrusted networks, protecting systems from unauthorized access and cyber threats.",
+        "keywords": ["firewall", "network security", "traffic control"]
+      },
+      {
+        "id": "cn_e_10",
+        "question": "What is a VPN?",
+        "ideal_answer": "A VPN (Virtual Private Network) is a service that creates a secure connection over the internet, allowing users to send data privately by encrypting their traffic and masking their IP addresses. It is commonly used for secure remote access and maintaining privacy online.",
+        "keywords": ["VPN", "secure connection", "encryption", "privacy"]
+      },
+      {
+        "id": "cn_e_11",
+        "question": "What is the role of a gateway in a network?",
+        "ideal_answer": "A gateway is a device that acts as a bridge between two different networks, typically one internal and one external, such as a local network and the internet. It is responsible for translating different protocols and ensuring that data can pass between different network architectures.",
+        "keywords": ["gateway", "network bridge", "protocol translation"]
+      },
+      {
+        "id": "cn_e_12",
+        "question": "What is the purpose of TCP in networking?",
+        "ideal_answer": "TCP (Transmission Control Protocol) is responsible for ensuring reliable communication between devices over a network. It establishes a connection before data transmission, ensures error-free delivery through acknowledgments, and manages flow control to avoid network congestion.",
+        "keywords": ["TCP", "reliable communication", "flow control"]
+      },
+      {
+        "id": "cn_e_13",
+        "question": "What is an HTTP protocol?",
+        "ideal_answer": "HTTP (Hypertext Transfer Protocol) is a protocol used for transferring data over the web. It defines how messages are formatted and transmitted, and how web servers and browsers should respond to various commands.",
+        "keywords": ["HTTP", "web protocol", "data transfer"]
+      },
+      {
+        "id": "cn_e_14",
+        "question": "What is bandwidth in networking?",
+        "ideal_answer": "Bandwidth refers to the maximum rate at which data can be transmitted over a network. It is typically measured in bits per second (bps) and determines the capacity of the network to carry data.",
+        "keywords": ["bandwidth", "data rate", "network capacity"]
+      },
+      {
+        "id": "cn_e_15",
+        "question": "What is a subnet?",
+        "ideal_answer": "A subnet is a smaller network within a larger network, created by dividing the network's IP address range into smaller sections using a subnet mask. It helps improve network performance, security, and management.",
+        "keywords": ["subnet", "IP address", "network division"]
+      },
+      {
+        "id": "cn_e_16",
+        "question": "What is a packet in networking?",
+        "ideal_answer": "A packet is a small unit of data that is transmitted across a network. It contains both the payload (actual data) and control information (such as headers and routing data) to help it reach its destination.",
+        "keywords": ["packet", "data unit", "network transmission"]
+      },
+      {
+        "id": "cn_e_17",
+        "question": "What is a LAN?",
+        "ideal_answer": "A LAN (Local Area Network) is a network that connects devices within a limited geographic area, such as a home, office, or building. It allows for the sharing of resources like files, printers, and internet connections.",
+        "keywords": ["LAN", "network", "local network"]
+      },
+      {
+        "id": "cn_e_18",
+        "question": "What is an IP address class?",
+        "ideal_answer": "IP address classes are categories of IP addresses used to define the range of addresses available for different types of networks. The classes include A, B, C, D, and E, with Class A, B, and C being the most commonly used for public and private networks.",
+        "keywords": ["IP address classes", "A, B, C, D, E", "network types"]
+      },
+      {
+        "id": "cn_e_19",
+        "question": "What is a network protocol?",
+        "ideal_answer": "A network protocol is a set of rules and conventions that govern how devices on a network communicate with each other. Examples include TCP/IP, HTTP, FTP, and DNS, each serving a different function in data transmission and network services.",
+        "keywords": ["network protocol", "communication rules", "TCP/IP", "HTTP"]
+      },
+      {
+        "id": "cn_e_20",
+        "question": "What is the difference between a static IP and a dynamic IP?",
+        "ideal_answer": "A static IP is an IP address that is manually assigned to a device and remains unchanged over time, while a dynamic IP is assigned by a DHCP (Dynamic Host Configuration Protocol) server and can change every time the device connects to the network.",
+        "keywords": ["static IP", "dynamic IP", "DHCP"]
+      }
+    ],
+    "medium": [
+      {
+        "id": "cn_m_1",
+        "question": "What is the OSI model? Explain its layers.",
+        "ideal_answer": "The OSI (Open Systems Interconnection) model is a conceptual framework used to understand network interactions in seven layers: 1) Physical, 2) Data Link, 3) Network, 4) Transport, 5) Session, 6) Presentation, and 7) Application. Each layer performs specific functions in network communication, with lower layers dealing with transmission and higher layers focusing on user interaction and application support.",
+        "keywords": ["OSI model", "layers", "network"]
+      },
+      {
+        "id": "cn_m_2",
+        "question": "What is a subnet mask and how does it work?",
+        "ideal_answer": "A subnet mask is used to divide an IP address into network and host portions. It specifies which part of the IP address represents the network and which part represents the host, allowing devices within the same network to communicate directly. It works by performing a bitwise AND operation with the IP address.",
+        "keywords": ["subnet mask", "IP address", "network"]
+      },
+      {
+        "id": "cn_m_3",
+        "question": "What is the difference between UDP and TCP?",
+        "ideal_answer": "UDP (User Datagram Protocol) is a connectionless protocol that sends data without establishing a connection, making it faster but less reliable. TCP (Transmission Control Protocol) is connection-oriented, ensuring reliable, error-free delivery of data by establishing a connection and using mechanisms like acknowledgments and retransmissions.",
+        "keywords": ["UDP", "TCP", "connectionless", "reliable"]
+      },
+      {
+        "id": "cn_m_4",
+        "question": "What is ARP and how does it work?",
+        "ideal_answer": "ARP (Address Resolution Protocol) is used to map a device's IP address to its MAC address in a local network. When a device needs to communicate with another device on the same network, it sends an ARP request to find the MAC address associated with a given IP address.",
+        "keywords": ["ARP", "IP address", "MAC address", "mapping"]
+      },
+      {
+        "id": "cn_m_5",
+        "question": "What is a VPN and how does it work?",
+        "ideal_answer": "A VPN (Virtual Private Network) creates a secure, encrypted connection over a public network like the internet. It allows remote users to access a private network securely, masking their IP address and ensuring that their data is protected from eavesdropping and hacking.",
+        "keywords": ["VPN", "encrypted connection", "remote access", "security"]
+      },
+      {
+        "id": "cn_m_6",
+        "question": "What is NAT (Network Address Translation)?",
+        "ideal_answer": "NAT is a technique used in networks to allow multiple devices on a local network to share a single public IP address. It modifies the source or destination IP address of packets as they pass through a router, helping to conserve IP addresses and improve security.",
+        "keywords": ["NAT", "Network Address Translation", "IP address", "router"]
+      },
+      {
+        "id": "cn_m_7",
+        "question": "What is a routing table and how does it work?",
+        "ideal_answer": "A routing table is a data structure stored in a router that contains the paths to various network destinations. It helps the router determine the best route for data packets based on criteria like destination IP address, network topology, and routing protocols.",
+        "keywords": ["routing table", "router", "network destination", "routing protocols"]
+      },
+      {
+        "id": "cn_m_8",
+        "question": "What is a broadcast in networking?",
+        "ideal_answer": "A broadcast is the transmission of data packets to all devices in a network segment. It is used when the source needs to send information to all devices, such as in ARP requests or network discovery protocols.",
+        "keywords": ["broadcast", "network", "data transmission"]
+      },
+      {
+        "id": "cn_m_9",
+        "question": "What is a gateway and how does it work?",
+        "ideal_answer": "A gateway is a device that connects two different networks and acts as a translator between different communication protocols. It can route traffic between a local network and the internet, as well as handle protocol conversions.",
+        "keywords": ["gateway", "protocol translation", "network"]
+      },
+      {
+        "id": "cn_m_10",
+        "question": "What is the role of DNS in networking?",
+        "ideal_answer": "DNS (Domain Name System) translates human-readable domain names into IP addresses, allowing browsers to locate websites and other resources on the internet. It works by querying DNS servers to resolve domain names into the corresponding IP addresses.",
+        "keywords": ["DNS", "domain name", "IP address", "resolution"]
+      },
+      {
+        "id": "cn_m_11",
+        "question": "What is the difference between a switch and a router?",
+        "ideal_answer": "A switch operates at the Data Link Layer (Layer 2) and is used to connect devices within a local area network (LAN), forwarding data based on MAC addresses. A router operates at the Network Layer (Layer 3) and is used to forward data between different networks, typically based on IP addresses.",
+        "keywords": ["switch", "router", "data forwarding", "network layers"]
+      },
+      {
+        "id": "cn_m_12",
+        "question": "What is a collision domain?",
+        "ideal_answer": "A collision domain is a network segment where data packets can collide with each other during transmission. In Ethernet networks, devices in the same collision domain must share bandwidth, which can lead to performance issues in high-traffic environments.",
+        "keywords": ["collision domain", "network", "data collision"]
+      },
+      {
+        "id": "cn_m_13",
+        "question": "What is the function of the transport layer in the OSI model?",
+        "ideal_answer": "The transport layer (Layer 4) is responsible for end-to-end communication, providing services such as error detection, flow control, and data segmentation. Protocols like TCP and UDP operate at this layer to ensure reliable or fast data transmission.",
+        "keywords": ["transport layer", "OSI model", "end-to-end communication"]
+      },
+      {
+        "id": "cn_m_14",
+        "question": "What is the difference between public and private IP addresses?",
+        "ideal_answer": "A public IP address is an address that is routable on the internet and can be accessed from anywhere, while a private IP address is used within a local network and is not directly accessible from the internet. Private IP addresses are typically used with NAT for secure communication.",
+        "keywords": ["public IP", "private IP", "network communication"]
+      },
+      {
+        "id": "cn_m_15",
+        "question": "What is a proxy server?",
+        "ideal_answer": "A proxy server acts as an intermediary between a client and a destination server. It can forward requests from the client to the server, caching responses and providing functions like content filtering, security, and load balancing.",
+        "keywords": ["proxy server", "intermediary", "caching", "security"]
+      },
+      {
+        "id": "cn_m_16",
+        "question": "What is QoS (Quality of Service) in networking?",
+        "ideal_answer": "QoS is a set of techniques used in networking to prioritize certain types of traffic over others. It ensures that critical applications (e.g., voice, video) receive the required bandwidth and low latency, while less important traffic (e.g., file transfers) may be deprioritized.",
+        "keywords": ["QoS", "traffic prioritization", "networking"]
+      },
+      {
+        "id": "cn_m_17",
+        "question": "What is a VLAN?",
+        "ideal_answer": "A VLAN (Virtual Local Area Network) is a logical grouping of devices within a physical network, allowing them to communicate as if they were on the same network, regardless of their physical location. VLANs are used to improve network security, management, and performance.",
+        "keywords": ["VLAN", "network segmentation", "security"]
+      },
+      {
+        "id": "cn_m_18",
+        "question": "What is SSL/TLS?",
+        "ideal_answer": "SSL (Secure Sockets Layer) and TLS (Transport Layer Security) are cryptographic protocols that provide secure communication over a computer network. They use encryption to protect data integrity and confidentiality between a client and a server, commonly used in HTTPS for secure web browsing.",
+        "keywords": ["SSL", "TLS", "encryption", "secure communication"]
+      },
+      {
+        "id": "cn_m_19",
+        "question": "What is a three-way handshake in TCP?",
+        "ideal_answer": "The three-way handshake is the process by which TCP establishes a connection between a client and a server. It involves three steps: 1) The client sends a SYN request to the server, 2) the server responds with a SYN-ACK, and 3) the client sends an ACK, establishing the connection.",
+        "keywords": ["three-way handshake", "TCP", "connection establishment"]
+      },
+      {
+        "id": "cn_m_20",
+        "question": "What is the role of the network layer in the OSI model?",
+        "ideal_answer": "The network layer (Layer 3) is responsible for routing data packets across different networks, ensuring that data is delivered from the source to the destination. It uses logical addressing (e.g., IP addresses) and may employ protocols like IP for routing.",
+        "keywords": ["network layer", "OSI model", "routing", "IP address"]
+      }
+    ],
+    "hard": [
+      {
+        "id": "cn_h_1",
+        "question": "Explain how TCP congestion control works. Describe its phases.",
+        "ideal_answer": "TCP congestion control works to prevent network congestion by adjusting the sending rate of packets. It uses a sliding window mechanism and operates in four phases: 1) Slow Start – Starts with a small congestion window and increases exponentially. 2) Congestion Avoidance – Increases linearly after reaching a threshold. 3) Fast Retransmit – When three duplicate ACKs are received, it retransmits the lost packet. 4) Fast Recovery – Reduces the congestion window by half after a loss, then resumes linear growth.",
+        "keywords": ["TCP", "congestion control", "slow start", "congestion avoidance"]
+      },
+      {
+        "id": "cn_h_2",
+        "question": "What are the differences between IPv4 and IPv6? Explain the benefits of IPv6.",
+        "ideal_answer": "IPv4 is a 32-bit address scheme, allowing for approximately 4.3 billion unique addresses, whereas IPv6 is 128-bit, allowing for a vastly larger address space. IPv6 also improves security with mandatory IPsec support, provides better support for multicast, simplifies header structure, and allows for more efficient routing. IPv6 also eliminates the need for NAT due to its large address space.",
+        "keywords": ["IPv4", "IPv6", "address space", "routing", "security"]
+      },
+      {
+        "id": "cn_h_3",
+        "question": "What is the concept of flow control in TCP, and how is it implemented?",
+        "ideal_answer": "Flow control in TCP ensures that the sender does not overwhelm the receiver by sending data too quickly. It is implemented using the sliding window mechanism, where the receiver advertises the window size, which specifies how much data it is willing to accept at once. The sender adjusts the transmission rate accordingly.",
+        "keywords": ["TCP", "flow control", "sliding window", "data transmission"]
+      },
+      {
+        "id": "cn_h_4",
+        "question": "Explain the process of IP fragmentation and reassembly.",
+        "ideal_answer": "IP fragmentation occurs when a packet is too large to be transmitted over a network with a smaller maximum transmission unit (MTU). The packet is divided into smaller fragments, each with a header containing information to reassemble them at the destination. The receiving host reassembles the fragments into the original packet by using the fragment offset and identifier fields in the IP header.",
+        "keywords": ["IP fragmentation", "reassembly", "MTU", "packet"]
+      },
+      {
+        "id": "cn_h_5",
+        "question": "What are the differences between unicast, multicast, and broadcast?",
+        "ideal_answer": "Unicast refers to one-to-one communication between a sender and a receiver. Multicast is one-to-many communication, where data is sent to a group of recipients. Broadcast is one-to-all communication, where data is sent to all devices in the network. Each type uses different addressing and protocols, with multicast requiring a multicast address range.",
+        "keywords": ["unicast", "multicast", "broadcast", "communication"]
+      },
+      {
+        "id": "cn_h_6",
+        "question": "What is the role of DNS in the internet and explain DNS resolution process?",
+        "ideal_answer": "DNS (Domain Name System) translates human-readable domain names (e.g., www.example.com) into IP addresses, allowing users to access websites. The DNS resolution process involves: 1) A user sends a query to a DNS resolver, 2) If the resolver doesn't have the record, it queries root servers, then authoritative DNS servers, and finally, the corresponding domain's DNS record is returned.",
+        "keywords": ["DNS", "domain resolution", "DNS resolver", "root servers"]
+      },
+      {
+        "id": "cn_h_7",
+        "question": "Describe the BGP routing protocol and how it ensures inter-domain routing.",
+        "ideal_answer": "BGP (Border Gateway Protocol) is an inter-domain routing protocol used to exchange routing information between autonomous systems (ASes) on the internet. BGP uses path vector routing, where each router advertises a list of ASes a packet has traversed. BGP selects the best path using various attributes like AS path, next hop, and prefix length.",
+        "keywords": ["BGP", "routing protocol", "inter-domain", "autonomous systems"]
+      },
+      {
+        "id": "cn_h_8",
+        "question": "Explain the concept of Network Address Translation (NAT) and the types of NAT.",
+        "ideal_answer": "NAT (Network Address Translation) is used to map private IP addresses to public ones, allowing multiple devices on a private network to share a single public IP. The types of NAT include: 1) Static NAT – One-to-one mapping between private and public IPs, 2) Dynamic NAT – A pool of public IPs is used for mapping, 3) Port Address Translation (PAT) – Multiple private IPs are mapped to a single public IP with different port numbers.",
+        "keywords": ["NAT", "static NAT", "dynamic NAT", "PAT"]
+      },
+      {
+        "id": "cn_h_9",
+        "question": "What is the significance of the 'TCP sliding window' and how does it affect performance?",
+        "ideal_answer": "The TCP sliding window is a flow control mechanism that determines how much data can be sent without receiving an acknowledgment. It affects performance by allowing efficient use of network resources. A larger window size allows the sender to send more data before waiting for acknowledgment, increasing throughput, but too large a window can lead to congestion.",
+        "keywords": ["TCP", "sliding window", "flow control", "performance"]
+      },
+      {
+        "id": "cn_h_10",
+        "question": "What is an SSL/TLS handshake, and how does it secure communication?",
+        "ideal_answer": "The SSL/TLS handshake is a process by which a client and server establish a secure connection. It involves: 1) The client sends a 'hello' message, 2) The server responds with its public key, 3) The client generates a session key and encrypts it with the server's public key, 4) Both parties now use the session key for encrypted communication. This ensures confidentiality and integrity of the data.",
+        "keywords": ["SSL", "TLS", "handshake", "encryption", "security"]
+      },
+      {
+        "id": "cn_h_11",
+        "question": "Explain the difference between distance-vector and link-state routing algorithms.",
+        "ideal_answer": "Distance-vector algorithms, like RIP, determine the best route based on the number of hops. They periodically broadcast their routing table to neighbors. Link-state algorithms, like OSPF, involve routers exchanging link-state information to build a complete map of the network and then calculate the shortest path. Link-state is more efficient and scales better than distance-vector.",
+        "keywords": ["distance-vector", "link-state", "routing algorithms", "RIP", "OSPF"]
+      },
+      {
+        "id": "cn_h_12",
+        "question": "What is MPLS (Multiprotocol Label Switching), and how does it improve network performance?",
+        "ideal_answer": "MPLS is a protocol for high-performance packet forwarding where packets are assigned labels. These labels are used by routers to forward packets based on pre-determined paths, known as label-switched paths (LSPs), rather than traditional IP routing. MPLS improves performance by reducing routing decision time and allowing for more efficient use of network resources.",
+        "keywords": ["MPLS", "packet forwarding", "label-switched paths", "network performance"]
+      },
+      {
+        "id": "cn_h_13",
+        "question": "Explain the concept of ARP spoofing and how to protect against it.",
+        "ideal_answer": "ARP spoofing is an attack where a malicious device sends fake ARP messages to associate its MAC address with the IP address of another device, allowing it to intercept or alter network traffic. To protect against ARP spoofing, techniques like static ARP entries, using secure protocols like HTTPS, and implementing ARP monitoring and detection tools are used.",
+        "keywords": ["ARP spoofing", "ARP", "security", "network attack"]
+      },
+      {
+        "id": "cn_h_14",
+        "question": "What is the difference between TCP and SCTP?",
+        "ideal_answer": "TCP (Transmission Control Protocol) is a connection-oriented protocol that provides reliable data transmission with error checking and flow control. SCTP (Stream Control Transmission Protocol) also offers reliable, message-oriented communication but supports multi-homing and message fragmentation, making it better suited for applications like VoIP and mobile communications.",
+        "keywords": ["TCP", "SCTP", "connection-oriented", "reliable transmission"]
+      },
+      {
+        "id": "cn_h_15",
+        "question": "What is the concept of QoS (Quality of Service) and how does it improve network performance?",
+        "ideal_answer": "QoS is a set of techniques to manage network traffic and prioritize certain types of data (like voice or video) to ensure reliable performance. It improves network performance by allocating more bandwidth to high-priority traffic, reducing latency and jitter, and ensuring better user experience in time-sensitive applications.",
+        "keywords": ["QoS", "network performance", "traffic prioritization", "latency"]
+      },
+      {
+        "id": "cn_h_16",
+        "question": "What is the purpose of a firewall, and how does it work?",
+        "ideal_answer": "A firewall is a security system that monitors and controls incoming and outgoing network traffic based on predetermined security rules. It works by filtering traffic, blocking malicious connections, and allowing legitimate communication. Firewalls can operate at different levels (e.g., network, application) and can be hardware or software-based.",
+        "keywords": ["firewall", "network security", "traffic control", "security rules"]
+      },
+      {
+        "id": "cn_h_17",
+        "question": "Explain the concept of virtual private LAN service (VPLS).",
+        "ideal_answer": "VPLS is a Layer 2 VPN technology that allows multiple geographically dispersed sites to appear as part of the same local area network (LAN). It enables Ethernet-based multipoint-to-multipoint communication over a wide area network (WAN), offering the scalability of IP with the flexibility of Ethernet.",
+        "keywords": ["VPLS", "VPN", "LAN", "multipoint-to-multipoint"]
+      },
+      {
+        "id": "cn_h_18",
+        "question": "What is SDN (Software-Defined Networking), and how does it differ from traditional networking?",
+        "ideal_answer": "SDN is an approach to network management where the control plane is decoupled from the data plane, allowing centralized control of the network. It differs from traditional networking, where control and data planes are coupled in each network device, limiting flexibility and scalability. SDN allows dynamic configuration and automation of network behavior.",
+        "keywords": ["SDN", "network management", "control plane", "data plane"]
+      },
+      {
+        "id": "cn_h_19",
+        "question": "What is the role of TCP congestion window in the context of performance?",
+        "ideal_answer": "The TCP congestion window controls the number of packets a sender can transmit before waiting for an acknowledgment. It dynamically adjusts based on network conditions to avoid congestion. A larger congestion window allows more data to be sent, improving throughput, but too large a window can lead to congestion and packet loss.",
+        "keywords": ["TCP", "congestion window", "performance", "throughput"]
+      },
+      {
+        "id": "cn_h_20",
+        "question": "What is the concept of a man-in-the-middle attack in networking, and how can it be mitigated?",
+        "ideal_answer": "A man-in-the-middle attack occurs when an attacker intercepts and possibly alters the communication between two parties. It can be mitigated using encryption (e.g., TLS/SSL) to ensure data integrity and confidentiality, mutual authentication, and using secure communication channels.",
+        "keywords": ["man-in-the-middle", "attack", "security", "encryption"]
+      }
+    ]
+  }
+}
+
+

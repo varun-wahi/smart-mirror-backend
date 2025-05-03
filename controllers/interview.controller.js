@@ -2,9 +2,14 @@
 require('dotenv').config();
 
 const { GoogleGenerativeAI } = require("@google/generative-ai");
+const questionProvider = require('../questionProvider');
 
 // Initialize the GoogleGenerativeAI instance with the Gemini API key
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_SECRET_KEY);
+// Only initialize if the API key exists (for fallback purposes)
+let genAI;
+if (process.env.GEMINI_SECRET_KEY) {
+    genAI = new GoogleGenerativeAI(process.env.GEMINI_SECRET_KEY);
+}
 
 // Function to generate interview questions
 const getInterviewQuestions = async (req, res) => {
@@ -16,11 +21,31 @@ const getInterviewQuestions = async (req, res) => {
             return res.status(400).json({ error: 'Please provide topic, difficulty, and numQuestions.' });
         }
 
-        // Get the model - using the updated model name
-        const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+        // First, try to get questions from our local repository
+        const localQuestions = questionProvider.getQuestions(topic, difficulty, parseInt(numQuestions));
+        
+        // If we found enough questions locally, return them
+        if (localQuestions.length === parseInt(numQuestions)) {
+            return res.status(200).json({ questions: localQuestions });
+        }
+        
+        // If we found some questions but not enough, return what we have
+        if (localQuestions.length > 0) {
+            return res.status(200).json({ 
+                questions: localQuestions,
+                message: `Found ${localQuestions.length} questions for topic "${topic}" at "${difficulty}" difficulty. This is fewer than the ${numQuestions} requested.`
+            });
+        }
+        
+        // If we have no questions locally and Gemini is configured, use it as fallback
+        if (genAI) {
+            console.log(`No local questions found for topic "${topic}". Falling back to Gemini API.`);
+            
+            // Get the model - using the updated model name
+            const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
-        // Format the prompt to explicitly request JSON
-        const prompt = `Generate ${numQuestions} interview questions on the topic '${topic}' at '${difficulty}' difficulty level. Provide answers for each question.
+            // Format the prompt to explicitly request JSON
+            const prompt = `Generate ${numQuestions} interview questions on the topic '${topic}' at '${difficulty}' difficulty level. Provide answers for each question.
 
 IMPORTANT: Your response must be ONLY a valid JSON array where each item is an object with "question" and "answer" keys, like this:
 [
@@ -32,47 +57,58 @@ IMPORTANT: Your response must be ONLY a valid JSON array where each item is an o
 
 Do not include any explanations, markdown formatting, or additional text - return ONLY the JSON array.`;
 
-        // Generation config without the unsupported responseFormat parameter
-        const generationConfig = {
-            temperature: 0.7,
-            topP: 0.8,
-            topK: 40
-        };
+            // Generation config without the unsupported responseFormat parameter
+            const generationConfig = {
+                temperature: 0.7,
+                topP: 0.8,
+                topK: 40
+            };
 
-        // Call the Gemini API using the generative model
-        const result = await model.generateContent({
-            contents: [{ role: "user", parts: [{ text: prompt }] }],
-            generationConfig
+            // Call the Gemini API using the generative model
+            const result = await model.generateContent({
+                contents: [{ role: "user", parts: [{ text: prompt }] }],
+                generationConfig
+            });
+
+            // Extract the response text from the result
+            let responseText = result.response.text();
+
+            // Clean the response to remove potential formatting
+            responseText = responseText.replace(/```json|```/g, '').trim();
+
+            let questions;
+            try {
+                // Parse the cleaned response as JSON
+                questions = JSON.parse(responseText);
+            } catch (parseError) {
+                console.error('Error parsing the cleaned response as JSON:', parseError.message);
+                return res.status(500).json({
+                    error: 'The response from the API was not in the expected JSON format after cleaning. Please try again later.',
+                    details: responseText // Send the raw response for debugging
+                });
+            }
+
+            // Validate the JSON structure
+            if (!Array.isArray(questions) || questions.some(q => !q.question || !q.answer)) {
+                return res.status(500).json({
+                    error: 'The response from the API did not contain the expected structure. Please try again later.',
+                    details: questions // Send the parsed response for debugging
+                });
+            }
+
+            // Send the questions back to the client
+            return res.status(200).json({ 
+                questions,
+                source: 'gemini' // Indicate these came from Gemini
+            });
+        }
+        
+        // If we have no local questions and no Gemini API configured
+        return res.status(404).json({ 
+            error: `No questions found for topic "${topic}" at "${difficulty}" difficulty and no AI fallback is configured.`,
+            availableTopics: questionProvider.listTopics()
         });
-
-        // Extract the response text from the result
-        let responseText = result.response.text();
-
-        // Clean the response to remove potential formatting
-        responseText = responseText.replace(/```json|```/g, '').trim();
-
-        let questions;
-        try {
-            // Parse the cleaned response as JSON
-            questions = JSON.parse(responseText);
-        } catch (parseError) {
-            console.error('Error parsing the cleaned response as JSON:', parseError.message);
-            return res.status(500).json({
-                error: 'The response from the API was not in the expected JSON format after cleaning. Please try again later.',
-                details: responseText // Send the raw response for debugging
-            });
-        }
-
-        // Validate the JSON structure
-        if (!Array.isArray(questions) || questions.some(q => !q.question || !q.answer)) {
-            return res.status(500).json({
-                error: 'The response from the API did not contain the expected structure. Please try again later.',
-                details: questions // Send the parsed response for debugging
-            });
-        }
-
-        // Send the questions back to the client
-        res.status(200).json({ questions });
+        
     } catch (error) {
         console.error('Error generating interview questions:', error.message);
         if (error.message.includes('API key')) {
@@ -92,6 +128,14 @@ const analyzeAnswer = async (req, res) => {
         // Validate the input
         if (!question || !answer) {
             return res.status(400).json({ error: 'Please provide question and answer.' });
+        }
+        
+        // Check if Gemini API is configured
+        if (!genAI) {
+            return res.status(501).json({ 
+                error: 'Answer analysis requires Gemini API which is not configured.',
+                feedback: 'Your answer has been recorded but automated feedback is not available.'
+            });
         }
 
         // Get the model
@@ -194,6 +238,14 @@ const analyzeInterview = async (req, res) => {
         // Validate the input
         if (!questions || !answers || !Array.isArray(questions) || Object.keys(answers).length === 0) {
             return res.status(400).json({ error: 'Please provide questions array and answers object.' });
+        }
+        
+        // Check if Gemini API is configured
+        if (!genAI) {
+            return res.status(501).json({ 
+                error: 'Interview analysis requires Gemini API which is not configured.',
+                feedback: 'Your answers have been recorded but automated feedback is not available.'
+            });
         }
 
         // Get the model

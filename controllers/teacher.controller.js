@@ -1,45 +1,68 @@
 const path = require('path');
 const fs = require('fs');
-const canvas = require('canvas');
-const faceapi = require('face-api.js');
-const { Canvas, Image } = require('canvas');
 const Teacher = require('../models/teacher.model');
-const { createCanvas, Image: CanvasImage } = require('canvas');
 
-// Patch nodejs environment for face-api.js
-faceapi.env.monkeyPatch({ Canvas, Image });
+// Path for face-api models
+const MODELS_PATH = path.join(__dirname, '../models');
 
-// Load face recognition models
-let modelsLoaded = false;
-async function loadModels() {
-  if (modelsLoaded) return;
-  
-  const MODEL_DIR = path.join(__dirname, '../models-face');
-  
+// Track initialization status
+let isInitialized = false;
+
+// Initialize face-api models
+async function initializeModels() {
   try {
-    await faceapi.nets.ssdMobilenetv1.loadFromDisk(MODEL_DIR);
-    await faceapi.nets.faceLandmark68Net.loadFromDisk(MODEL_DIR);
-    await faceapi.nets.faceRecognitionNet.loadFromDisk(MODEL_DIR);
-    modelsLoaded = true;
-    console.log('Face recognition models loaded successfully');
+    // Make sure models directory exists
+    if (!fs.existsSync(MODELS_PATH)) {
+      fs.mkdirSync(MODELS_PATH, { recursive: true });
+    }
+    
+    // Configure faceapi to use tfjs-node
+    await faceapi.tf.setBackend('tensorflow');
+    await faceapi.tf.enableProdMode();
+    await faceapi.tf.ready();
+    
+    // Load models
+    await faceapi.nets.ssdMobilenetv1.loadFromDisk(MODELS_PATH);
+    await faceapi.nets.faceLandmark68Net.loadFromDisk(MODELS_PATH);
+    await faceapi.nets.faceRecognitionNet.loadFromDisk(MODELS_PATH);
+
+    isInitialized = true;
+    console.log('Face API models loaded successfully');
+    return true;
   } catch (error) {
-    console.error('Error loading face recognition models:', error);
-    throw error;
+    console.error('Error loading face-api models:', error);
+    return false;
   }
 }
 
+// Convert base64 to buffer
+function base64ToBuffer(base64Image) {
+  const base64Data = base64Image.replace(/^data:image\/\w+;base64,/, '');
+  return Buffer.from(base64Data, 'base64');
+}
+
+// Initialize the face recognition system
 const initializeSystem = async (req, res) => {
   try {
-    await loadModels();
-    res.status(200).json({ message: 'Face recognition system initialized' });
+    const success = await initializeModels();
+    if (success) {
+      res.status(200).json({ message: 'Face recognition system initialized successfully' });
+    } else {
+      res.status(500).json({ error: 'Failed to initialize face recognition system' });
+    }
   } catch (error) {
+    console.error('Initialization error:', error);
     res.status(500).json({ error: 'Failed to initialize face recognition system' });
   }
 };
 
+// Verify a face against stored teacher faces
 const verifyFace = async (req, res) => {
   try {
-    await loadModels();
+    // Ensure models are loaded
+    if (!isInitialized) {
+      await initializeModels();
+    }
     
     // Get base64 image from request
     const { imageBase64 } = req.body;
@@ -48,22 +71,31 @@ const verifyFace = async (req, res) => {
     }
     
     // Convert base64 to buffer
-    const buffer = Buffer.from(imageBase64.replace(/^data:image\/\w+;base64,/, ''), 'base64');
-    const image = await canvas.loadImage(buffer);
+    const imageBuffer = base64ToBuffer(imageBase64);
     
-    // Detect faces in the image
-    const detections = await faceapi.detectAllFaces(image)
+    // Convert buffer to tensor
+    const tensor = tf.node.decodeImage(imageBuffer);
+    
+    // Detect faces
+    const detections = await faceapi
+      .detectAllFaces(tensor)
       .withFaceLandmarks()
       .withFaceDescriptors();
-      
-    if (!detections.length) {
+    
+    // Free memory
+    tensor.dispose();
+    
+    if (detections.length === 0) {
       return res.status(400).json({ error: 'No face detected in the image' });
     }
     
-    // Get all teachers' face descriptors from the database
-    const teachers = await Teacher.find({}, 'name faceDescriptor');
+    // Get the descriptor from the first detected face
+    const queryDescriptor = detections[0].descriptor;
     
-    // Create a face matcher with the teachers' data
+    // Get all teachers from the database
+    const teachers = await Teacher.find({}, 'name email department faceDescriptor');
+    
+    // Create labeled face descriptors for face matcher
     const labeledDescriptors = teachers.map(teacher => {
       return new faceapi.LabeledFaceDescriptors(
         teacher._id.toString(),
@@ -71,10 +103,16 @@ const verifyFace = async (req, res) => {
       );
     });
     
-    const faceMatcher = new faceapi.FaceMatcher(labeledDescriptors, 0.6); // 0.6 is the distance threshold
+    // No teachers found
+    if (labeledDescriptors.length === 0) {
+      return res.status(404).json({ error: 'No registered teachers found' });
+    }
+    
+    // Create face matcher with lower distance threshold (0.5 is more strict than 0.6)
+    const faceMatcher = new faceapi.FaceMatcher(labeledDescriptors, 0.5);
     
     // Find best match
-    const bestMatch = faceMatcher.findBestMatch(detections[0].descriptor);
+    const bestMatch = faceMatcher.findBestMatch(queryDescriptor);
     
     if (bestMatch.label === 'unknown') {
       return res.status(404).json({ error: 'Teacher not recognized' });
@@ -82,6 +120,10 @@ const verifyFace = async (req, res) => {
     
     // Update teacher attendance
     const teacher = await Teacher.findById(bestMatch.label);
+    if (!teacher) {
+      return res.status(404).json({ error: 'Teacher record not found' });
+    }
+    
     teacher.lastAttendance = new Date();
     teacher.isPresent = true;
     await teacher.save();
@@ -94,60 +136,130 @@ const verifyFace = async (req, res) => {
         name: teacher.name,
         email: teacher.email,
         department: teacher.department,
-        schedule: teacher.schedule,
         lastAttendance: teacher.lastAttendance
       }
     });
     
   } catch (error) {
     console.error('Face verification error:', error);
-    res.status(500).json({ error: 'Face verification failed' });
+    res.status(500).json({ error: 'Face verification failed: ' + error.message });
   }
 };
 
+// Register a teacher face
 const registerFace = async (req, res) => {
   try {
-    await loadModels();
-    
-    const { imageBase64, teacherId } = req.body;
-    
-    if (!imageBase64 || !teacherId) {
-      return res.status(400).json({ error: 'Image and teacher ID required' });
+    // Ensure models are loaded
+    if (!isInitialized) {
+      await initializeModels();
     }
     
-    // Find teacher
-    const teacher = await Teacher.findById(teacherId);
-    if (!teacher) {
-      return res.status(404).json({ error: 'Teacher not found' });
+    const { imageBase64, teacherId, name, email, department } = req.body;
+    
+    if (!imageBase64 || !name || !email || !department) {
+      return res.status(400).json({ error: 'Missing required fields' });
     }
     
-    // Process image
-    const buffer = Buffer.from(imageBase64.replace(/^data:image\/\w+;base64,/, ''), 'base64');
-    const image = await canvas.loadImage(buffer);
+    // Convert base64 to buffer
+    const imageBuffer = base64ToBuffer(imageBase64);
     
-    // Detect face in the image
-    const detections = await faceapi.detectAllFaces(image)
+    // Convert buffer to tensor
+    const tensor = tf.node.decodeImage(imageBuffer);
+    
+    // Detect faces
+    const detections = await faceapi
+      .detectSingleFace(tensor)
       .withFaceLandmarks()
-      .withFaceDescriptors();
-      
-    if (!detections.length) {
+      .withFaceDescriptor();
+    
+    // Free memory
+    tensor.dispose();
+    
+    if (!detections) {
       return res.status(400).json({ error: 'No face detected in the image' });
     }
     
-    // Save face descriptor to teacher record
-    teacher.faceDescriptor = Array.from(detections[0].descriptor);
+    // Get face descriptor as an array
+    const descriptorArray = Array.from(detections.descriptor);
+    
+    // Update or create teacher record
+    let teacher;
+    
+    if (teacherId) {
+      // Update existing teacher
+      teacher = await Teacher.findById(teacherId);
+      
+      if (!teacher) {
+        return res.status(404).json({ error: 'Teacher not found' });
+      }
+      
+      teacher.name = name;
+      teacher.email = email;
+      teacher.department = department;
+      teacher.faceDescriptor = descriptorArray;
+    } else {
+      // Create new teacher
+      teacher = new Teacher({
+        name,
+        email,
+        department,
+        faceDescriptor: descriptorArray,
+        isPresent: false
+      });
+    }
+    
     await teacher.save();
     
-    res.status(200).json({ message: 'Face registered successfully' });
+    res.status(200).json({
+      success: true,
+      message: 'Face registered successfully',
+      teacherId: teacher._id
+    });
     
   } catch (error) {
     console.error('Face registration error:', error);
-    res.status(500).json({ error: 'Face registration failed' });
+    res.status(500).json({ error: 'Face registration failed: ' + error.message });
+  }
+};
+
+// Download models if not exists
+const downloadModels = async (req, res) => {
+  try {
+    // Check if models already exist
+    const ssdModelPath = path.join(MODELS_PATH, 'ssd_mobilenetv1_model-weights_manifest.json');
+    
+    if (fs.existsSync(ssdModelPath)) {
+      return res.status(200).json({ message: 'Models already exist' });
+    }
+    
+    // Create models directory if it doesn't exist
+    if (!fs.existsSync(MODELS_PATH)) {
+      fs.mkdirSync(MODELS_PATH, { recursive: true });
+    }
+    
+    // URLs for models
+    const modelUrls = {
+      ssdMobilenetv1: 'https://github.com/vladmandic/face-api/blob/master/model/ssd_mobilenetv1_model-weights_manifest.json',
+      faceLandmark68Net: 'https://github.com/vladmandic/face-api/blob/master/model/face_landmark_68_model-weights_manifest.json',
+      faceRecognitionNet: 'https://github.com/vladmandic/face-api/blob/master/model/face_recognition_model-weights_manifest.json'
+    };
+    
+    // Instructions for manual download
+    res.status(200).json({
+      message: 'Please download models manually from the following URLs and place them in the models directory:',
+      modelUrls,
+      modelsPath: MODELS_PATH
+    });
+    
+  } catch (error) {
+    console.error('Model download error:', error);
+    res.status(500).json({ error: 'Failed to check/download models' });
   }
 };
 
 module.exports = {
-    initializeSystem,
-    verifyFace,
-    registerFace,
+  initializeSystem,
+  verifyFace,
+  registerFace,
+  downloadModels
 };

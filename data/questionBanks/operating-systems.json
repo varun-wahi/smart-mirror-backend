@@ -1,0 +1,372 @@
+{
+  "topic": "Operating Systems",
+  "questions": {
+    "easy": [
+      {
+        "id": "os_e_01",
+        "question": "What is an operating system?",
+        "ideal_answer": "An operating system is software that manages all hardware and software resources of a computer. It provides a user interface to interact with the system and ensures smooth execution of applications. It handles memory, manages files, runs processes, and controls devices like keyboards and printers. The OS also ensures that programs don’t interfere with each other and that resources are used efficiently. Examples include Windows, Linux, macOS, and Android. Without an OS, users wouldn’t be able to run programs, open files, or use the system effectively. It is essential for modern computing.",
+        "keywords": ["operating system", "management", "interface", "resources"]
+      },
+      {
+        "id": "os_e_02",
+        "question": "What are the main functions of an operating system?",
+        "ideal_answer": "The main functions of an operating system include process management, memory management, file management, device control, and security. It helps run programs by assigning them time and resources. It keeps track of memory usage and allocates or frees memory when needed. It organizes data on storage devices, controls hardware like printers and monitors, and ensures only authorized users can access certain files or features. The OS also manages communication between different software and hardware components. These functions ensure that the system runs smoothly, efficiently, and securely for the user and applications.",
+        "keywords": ["process", "memory", "file", "security", "device control"]
+      },
+      {
+        "id": "os_e_03",
+        "question": "What is a kernel in an operating system?",
+        "ideal_answer": "The kernel is the core part of an operating system that manages system resources and communication between hardware and software. It handles essential tasks like memory management, process scheduling, and hardware communication. When a user opens a file or runs a program, the kernel ensures that necessary resources are provided. It works in the background and operates at the most privileged level of the system. Users typically do not interact with the kernel directly, but it plays a critical role in keeping everything running smoothly. It's like the brain of the operating system.",
+        "keywords": ["kernel", "core", "memory", "process", "hardware"]
+      },
+      {
+        "id": "os_e_04",
+        "question": "What is multitasking in operating systems?",
+        "ideal_answer": "Multitasking refers to the ability of an operating system to execute multiple tasks or programs at the same time. This does not mean that the computer literally runs everything simultaneously, but it switches between tasks very quickly to give the illusion of parallel activity. For example, you can listen to music while browsing the internet. The OS manages system resources and time-sharing so that each application gets the attention it needs without disrupting others. This improves productivity and user experience by allowing smooth operation of several applications together.",
+        "keywords": ["multitasking", "switching", "programs", "time-sharing"]
+      },
+      {
+        "id": "os_e_05",
+        "question": "What is a process in an operating system?",
+        "ideal_answer": "A process is an instance of a program that is currently being executed. When you open an application like a browser or a text editor, it becomes a process. The operating system assigns resources like memory and CPU time to it. Each process is isolated from others to ensure security and stability. Processes can also create other processes, called child processes. The OS keeps track of all active processes using a process table. Managing these processes efficiently is one of the key responsibilities of an operating system.",
+        "keywords": ["process", "execution", "resources", "CPU", "memory"]
+      },
+      {
+        "id": "os_e_06",
+        "question": "What is memory management in an operating system?",
+        "ideal_answer": "Memory management is the function of an operating system that handles the computer's memory. It keeps track of each byte in a computer’s memory and manages the allocation and deallocation of memory spaces as needed. This allows multiple programs to run simultaneously without interfering with each other. The OS ensures that each process gets the memory it requires and that unused memory is made available for others. Efficient memory management helps improve system performance, prevents crashes, and ensures smooth multitasking. It's like a traffic manager for the computer's RAM.",
+        "keywords": ["memory", "RAM", "allocation", "deallocation", "management"]
+      },
+      {
+        "id": "os_e_07",
+        "question": "What is a file system in an operating system?",
+        "ideal_answer": "A file system is a method used by the operating system to store, organize, and manage data on storage devices like hard drives or SSDs. It keeps track of where each file is located, what it’s called, and how to access it. The file system allows users to create, open, edit, save, and delete files easily. It also handles permissions to ensure that only authorized users can access certain files. Common file systems include NTFS, FAT32, and ext4. Without a file system, the OS would not know how to manage data effectively.",
+        "keywords": ["file system", "storage", "organization", "permissions", "data"]
+      },
+      {
+        "id": "os_e_08",
+        "question": "What are the types of operating systems?",
+        "ideal_answer": "Operating systems can be classified into several types based on their functionality. Common types include batch operating systems, time-sharing systems, distributed systems, networked systems, and real-time systems. Batch systems process jobs in batches without user interaction. Time-sharing systems allow multiple users to share system resources. Distributed systems use multiple computers to perform a task. Networked systems enable computers to communicate over a network. Real-time systems respond to inputs immediately and are used in critical applications like medical or industrial systems. Each type is designed to serve specific purposes effectively.",
+        "keywords": ["batch", "time-sharing", "real-time", "distributed", "networked"]
+      },
+      {
+        "id": "os_e_09",
+        "question": "What is a user interface in an operating system?",
+        "ideal_answer": "A user interface (UI) is the part of an operating system that allows users to interact with the computer. It can be graphical (GUI), like the desktop interface in Windows or macOS, or command-line based, like the terminal in Linux. The UI provides tools like windows, icons, menus, or text commands to operate the computer. It helps users perform tasks such as opening files, running programs, or adjusting settings. A good UI is intuitive, responsive, and easy to navigate, making the computing experience smoother and more productive for users.",
+        "keywords": ["user interface", "GUI", "CLI", "interaction", "navigation"]
+      },
+      {
+        "id": "os_e_10",
+        "question": "What is booting in operating systems?",
+        "ideal_answer": "Booting is the process of starting a computer and loading the operating system into memory. When you power on a computer, it runs a small program called the BIOS or UEFI, which checks the hardware and then loads the OS from the storage device into RAM. This is called the boot sequence. Once the OS is loaded, it takes control and starts managing hardware and software. Booting can be cold (from power-off) or warm (restarting). It's an essential step that prepares the system to accept user commands and run applications.",
+        "keywords": ["booting", "BIOS", "startup", "OS load", "RAM"]
+      },
+      {
+        "id": "os_e_11",
+        "question": "What is the difference between system software and application software?",
+        "ideal_answer": "System software includes programs that manage the hardware and basic operations of a computer. The operating system is a prime example. It allows the computer to function and provides a platform for other software to run. Application software, on the other hand, is designed for end users to perform specific tasks such as word processing, browsing the internet, or playing music. While system software runs in the background, application software runs on top of it. Both are essential, but they serve different roles in computing.",
+        "keywords": ["system software", "application software", "management", "user", "tasks"]
+      },
+      {
+        "id": "os_e_12",
+        "question": "What is a device driver?",
+        "ideal_answer": "A device driver is a special type of system software that allows the operating system to communicate with hardware devices like printers, keyboards, or graphic cards. It acts like a translator between the OS and the hardware, ensuring commands sent from software are understood and executed correctly by the hardware. Without the correct driver, hardware may not function properly. Each device typically has its own specific driver, and updates are sometimes needed to improve performance or fix bugs.",
+        "keywords": ["device driver", "hardware", "communication", "translator", "software"]
+      },
+      {
+        "id": "os_e_13",
+        "question": "What is a command-line interface (CLI)?",
+        "ideal_answer": "A command-line interface (CLI) is a way for users to interact with the operating system by typing text commands into a console or terminal. Unlike graphical user interfaces (GUIs), which use windows and icons, CLI requires users to remember and type commands to perform tasks like copying files or opening applications. It’s powerful and efficient, especially for advanced users or administrators, because it can execute complex commands quickly. However, it can be intimidating for beginners who are unfamiliar with the command syntax.",
+        "keywords": ["CLI", "commands", "terminal", "interface", "console"]
+      },
+      {
+        "id": "os_e_14",
+        "question": "What is a graphical user interface (GUI)?",
+        "ideal_answer": "A graphical user interface (GUI) is a type of user interface that uses visual elements like windows, buttons, icons, and menus to allow users to interact with the computer. It is intuitive and user-friendly, making it easier for people to use computers without needing to memorize commands. Examples include the Windows desktop or macOS interface. GUIs help users perform tasks such as opening applications, managing files, and adjusting settings with simple clicks instead of typing commands, which enhances accessibility and ease of use.",
+        "keywords": ["GUI", "icons", "windows", "menus", "visual"]
+      },
+      {
+        "id": "os_e_15",
+        "question": "What is a thread in an operating system?",
+        "ideal_answer": "A thread is the smallest unit of execution in a process. It represents a single sequence of operations within a program. Multiple threads can exist within one process and share the same resources like memory, which makes it efficient to perform multiple tasks at once. For example, a browser can use separate threads to load a webpage, play a video, and handle user input simultaneously. Threads help improve performance and responsiveness, especially in modern multi-core processors. The operating system manages their scheduling and execution.",
+        "keywords": ["thread", "execution", "process", "resources", "parallel"]
+      },
+      {
+        "id": "os_e_16",
+        "question": "What is the purpose of a scheduler in an OS?",
+        "ideal_answer": "A scheduler in an operating system decides which process or thread should run next on the CPU. Since the CPU can handle only one task at a time per core, the scheduler makes sure that each task gets a fair share of time and that critical tasks are prioritized. It improves the efficiency of the system by managing the order and timing of tasks. The scheduler balances between speed, fairness, and responsiveness so the system works smoothly for all users and applications.",
+        "keywords": ["scheduler", "CPU", "process", "time", "task"]
+      },
+      {
+        "id": "os_e_17",
+        "question": "What is virtual memory?",
+        "ideal_answer": "Virtual memory is a memory management technique where the operating system uses a portion of the hard drive as if it were RAM. When actual RAM is full, the OS moves inactive data to the virtual memory space, freeing up physical memory for active tasks. This allows larger applications to run even if there isn't enough physical RAM. It creates an illusion of more memory, helping maintain system performance. However, accessing virtual memory is slower than using RAM, so it's used only when necessary.",
+        "keywords": ["virtual memory", "RAM", "hard drive", "management", "performance"]
+      },
+      {
+        "id": "os_e_18",
+        "question": "What is an interrupt in operating systems?",
+        "ideal_answer": "An interrupt is a signal sent to the processor by hardware or software to indicate that an event needs immediate attention. For example, when you press a key or click a mouse, it sends an interrupt. The CPU temporarily pauses its current task, handles the interrupt, and then resumes its work. This mechanism allows the system to respond quickly to important events. Interrupts are crucial for multitasking, allowing the OS to manage various tasks without constantly checking for changes.",
+        "keywords": ["interrupt", "CPU", "event", "signal", "multitasking"]
+      },
+      {
+        "id": "os_e_19",
+        "question": "What is a shell in an operating system?",
+        "ideal_answer": "A shell is a user interface for accessing the services of an operating system. It can be command-line based or graphical, but it primarily refers to the command-line interface. The shell accepts user commands, interprets them, and passes them to the OS to execute. In Linux and UNIX systems, shells like Bash or Zsh are commonly used. It acts as a bridge between the user and the operating system’s core. Users can navigate files, execute programs, or manage processes using the shell.",
+        "keywords": ["shell", "interface", "commands", "Bash", "execution"]
+      },
+      {
+        "id": "os_e_20",
+        "question": "Why are operating systems important?",
+        "ideal_answer": "Operating systems are essential because they serve as the foundation for all computer operations. They manage hardware like the CPU, memory, and input/output devices, and provide an environment where applications can run. The OS ensures resources are used efficiently, protects data, and allows users to interact with the system easily. Without an operating system, users wouldn’t be able to open files, run programs, or even turn on a computer properly. It plays a central role in ensuring that the entire computing experience is stable, secure, and usable.",
+        "keywords": ["importance", "hardware", "applications", "management", "interface"]
+      }
+    ],
+    "medium": [
+      {
+        "id": "os_m_01",
+        "question": "What is the difference between process and thread?",
+        "ideal_answer": "A process is an independent program in execution, with its own memory space, while a thread is a smaller unit of execution within a process. A process can have multiple threads, each sharing the process’s resources like memory. Threads are more lightweight than processes, allowing more efficient multitasking. A process has its own address space, while threads share the memory of their parent process. Threads are ideal for parallel execution within a program, reducing overhead and improving performance in certain tasks.",
+        "keywords": ["process", "thread", "execution", "memory", "parallel"]
+      },
+      {
+        "id": "os_m_02",
+        "question": "Explain the concept of context switching in an operating system.",
+        "ideal_answer": "Context switching refers to the process where the CPU switches from one task or process to another. This is necessary in multitasking systems to give the illusion of simultaneous execution. During context switching, the current state (or context) of the running process is saved, and the state of the next process is loaded. The operating system manages these switches, ensuring that processes continue from where they left off. While context switching is essential for multitasking, it adds overhead, which can reduce system efficiency if done excessively.",
+        "keywords": ["context switching", "multitasking", "CPU", "process", "overhead"]
+      },
+      {
+        "id": "os_m_03",
+        "question": "What is the purpose of memory management in an operating system?",
+        "ideal_answer": "Memory management in an operating system involves allocating and managing memory for processes and programs. Its goal is to optimize the use of physical memory, ensuring that each process gets enough memory to function without conflicts. It also ensures that processes do not interfere with each other’s memory. Key techniques in memory management include paging, segmentation, and virtual memory. The OS keeps track of each byte in the system, allocating memory when needed and freeing it up when no longer required.",
+        "keywords": ["memory management", "allocation", "paging", "virtual memory", "segmentation"]
+      },
+      {
+        "id": "os_m_04",
+        "question": "What is deadlock in an operating system, and how can it be prevented?",
+        "ideal_answer": "Deadlock occurs when two or more processes cannot proceed because each is waiting for the other to release resources. This creates a circular wait where processes are stuck. To prevent deadlocks, the OS can use strategies such as avoiding circular wait conditions, acquiring resources in a fixed order, and using timeout mechanisms to release resources. Another approach is resource allocation with a wait-for graph, which helps in detecting deadlocks before they happen, allowing the system to handle them proactively.",
+        "keywords": ["deadlock", "prevention", "circular wait", "resources", "wait-for graph"]
+      },
+      {
+        "id": "os_m_05",
+        "question": "Explain the concept of paging in memory management.",
+        "ideal_answer": "Paging is a memory management scheme that eliminates the need for contiguous memory allocation. It breaks physical memory into fixed-size blocks, called frames, and logical memory into blocks of the same size, called pages. When a process is loaded into memory, its pages are mapped to available frames, which may not be contiguous. This allows for efficient use of memory and eliminates fragmentation. The operating system uses a page table to keep track of the mapping between pages and frames.",
+        "keywords": ["paging", "memory management", "fragmentation", "page table", "frames"]
+      },
+      {
+        "id": "os_m_06",
+        "question": "What is a file system and how does it function?",
+        "ideal_answer": "A file system is a method used by the operating system to store, organize, and retrieve files on a storage device. It determines how files are named, stored, and accessed. File systems divide the storage space into blocks or sectors and manage metadata, such as file names, permissions, and locations. Popular file systems include NTFS, FAT32, and ext4. The file system ensures efficient space utilization, access control, and data integrity, and it provides the structure for organizing files into directories and subdirectories.",
+        "keywords": ["file system", "storage", "files", "metadata", "access"]
+      },
+      {
+        "id": "os_m_07",
+        "question": "What is a page fault in virtual memory?",
+        "ideal_answer": "A page fault occurs when a program tries to access a page that is not currently in physical memory (RAM). When this happens, the operating system needs to load the missing page from disk into memory. If there is no free memory available, the OS may need to swap out an existing page to make room for the new one. Although page faults are normal in systems using virtual memory, frequent page faults can slow down the system, causing what’s known as 'thrashing'.",
+        "keywords": ["page fault", "virtual memory", "RAM", "disk", "thrashing"]
+      },
+      {
+        "id": "os_m_08",
+        "question": "What is a system call in an operating system?",
+        "ideal_answer": "A system call is a mechanism that allows user programs to interact with the operating system's kernel. It provides an interface through which programs can request services from the OS, such as file manipulation, process control, or memory allocation. System calls act as a gateway for user-space applications to access system resources, enabling functions that require higher privileges than those available in user space. Examples of system calls include opening a file, creating a process, or reading input from a device.",
+        "keywords": ["system call", "kernel", "user programs", "services", "privileges"]
+      },
+      {
+        "id": "os_m_09",
+        "question": "What is the role of the operating system in managing input/output (I/O)?",
+        "ideal_answer": "The operating system manages input and output devices by providing a uniform interface for communication. It controls and schedules I/O operations, ensuring that devices such as keyboards, printers, and disk drives operate correctly. The OS uses device drivers to translate commands from the application into actions the hardware can understand. It also buffers data during transfers to improve efficiency and ensures that multiple programs do not interfere with each other's use of I/O devices, providing a stable environment for tasks.",
+        "keywords": ["I/O management", "devices", "device drivers", "buffering", "scheduling"]
+      },
+      {
+        "id": "os_m_10",
+        "question": "What is the difference between user mode and kernel mode in an operating system?",
+        "ideal_answer": "In an operating system, user mode and kernel mode are two distinct modes of operation. Kernel mode, also known as privileged mode, is where the operating system's core functions execute. In this mode, the OS has full access to the hardware and system resources. User mode, on the other hand, is where applications and user programs run. In user mode, programs have limited access to system resources to prevent them from harming the system or other processes. The OS manages transitions between these modes for security and stability.",
+        "keywords": ["user mode", "kernel mode", "privileged", "system resources", "security"]
+      },
+      {
+        "id": "os_m_11",
+        "question": "Explain the difference between preemptive and non-preemptive scheduling.",
+        "ideal_answer": "Preemptive scheduling allows the operating system to interrupt a running process and assign the CPU to another process. This ensures that higher-priority processes get CPU time even if a lower-priority process is already running. Non-preemptive scheduling, on the other hand, lets processes run to completion or until they voluntarily release the CPU. Preemptive scheduling is more efficient in systems that require multitasking, while non-preemptive scheduling is simpler and often used in real-time systems where tasks must be completed without interruption.",
+        "keywords": ["preemptive scheduling", "non-preemptive scheduling", "CPU", "interruption", "task management"]
+      },
+      {
+        "id": "os_m_12",
+        "question": "What is thrashing in operating systems?",
+        "ideal_answer": "Thrashing occurs when the operating system spends the majority of its time swapping data between main memory and disk, rather than executing processes. This happens when there isn’t enough memory to support the running processes, causing the OS to constantly load and unload pages from virtual memory. Thrashing severely degrades system performance and can make the system unresponsive. It typically occurs in systems with excessive paging or when too many processes compete for limited resources. To avoid thrashing, the system needs proper memory management.",
+        "keywords": ["thrashing", "paging", "memory", "virtual memory", "performance"]
+      },
+      {
+        "id": "os_m_13",
+        "question": "What is the purpose of the operating system's kernel?",
+        "ideal_answer": "The kernel is the core component of an operating system that manages hardware and system resources. It provides essential services such as process management, memory management, file system management, and device control. The kernel interacts directly with the hardware, abstracting the complexity for user applications. It ensures security and stability by enforcing access controls and handling system calls. Without the kernel, user programs would not be able to access or control hardware devices in a safe and organized manner.",
+        "keywords": ["kernel", "core", "system resources", "process management", "security"]
+      },
+      {
+        "id": "os_m_14",
+        "question": "What are the advantages of a multi-threaded application?",
+        "ideal_answer": "Multi-threaded applications can perform multiple tasks concurrently within a single process. This improves the performance of applications by making use of multi-core processors, allowing for parallel execution. For example, one thread can handle user input while another performs background calculations. Multi-threading can lead to better resource utilization, as the system can switch between threads when one is waiting for I/O operations. It also makes applications more responsive, especially in real-time systems, where time-sensitive tasks need to be completed quickly.",
+        "keywords": ["multi-threading", "concurrency", "parallel execution", "performance", "real-time"]
+      },
+      {
+        "id": "os_m_15",
+        "question": "How does the operating system handle multitasking?",
+        "ideal_answer": "The operating system handles multitasking by rapidly switching between processes or threads, giving each one a small time slice of CPU time. This process is called context switching. The OS maintains a list of all running processes and their states, ensuring that each one gets a fair share of CPU time. In preemptive multitasking, the OS can interrupt processes to ensure that high-priority tasks are executed first. Multitasking increases system efficiency by allowing multiple tasks to progress simultaneously, creating the illusion of concurrent execution.",
+        "keywords": ["multitasking", "context switching", "CPU", "time slice", "efficiency"]
+      },
+      {
+        "id": "os_m_16",
+        "question": "What are the main functions of an operating system's file system?",
+        "ideal_answer": "The file system in an operating system is responsible for organizing, storing, and managing data on storage devices like hard drives and SSDs. It provides a structure for files, directories, and permissions, ensuring that data is easily accessible, secure, and well-organized. The file system tracks the location of files, manages access rights, and ensures data integrity. Additionally, it handles operations like reading, writing, and modifying files, as well as managing disk space to prevent fragmentation and improve performance.",
+        "keywords": ["file system", "storage", "organization", "permissions", "data integrity"]
+      },
+      {
+        "id": "os_m_17",
+        "question": "What is the role of interrupts in an operating system?",
+        "ideal_answer": "Interrupts are signals sent by hardware or software to notify the CPU of an event that needs immediate attention. In an operating system, interrupts are used to prioritize tasks and manage I/O operations efficiently. When an interrupt occurs, the CPU halts its current task, saves its state, and begins executing the interrupt handler. This allows the system to respond to real-time events such as input from a keyboard or a mouse. Interrupts are essential for multitasking, ensuring the CPU efficiently manages its workload.",
+        "keywords": ["interrupts", "CPU", "hardware", "I/O operations", "multitasking"]
+      },
+      {
+        "id": "os_m_18",
+        "question": "Explain the concept of kernel modules.",
+        "ideal_answer": "Kernel modules are pieces of code that can be loaded into the kernel at runtime. They extend the functionality of the kernel without requiring a reboot of the system. Kernel modules can be used for adding support for new hardware, file systems, or system services. They provide flexibility to the operating system, allowing it to be customized and extended dynamically. The OS loads and unloads these modules as needed, improving efficiency and allowing for updates or changes without disrupting the system’s operation.",
+        "keywords": ["kernel modules", "dynamically", "extension", "functionality", "support"]
+      },
+      {
+        "id": "os_m_19",
+        "question": "What is the difference between a soft and hard link in a file system?",
+        "ideal_answer": "A soft link (or symbolic link) is a reference to a file or directory in the form of a path. It can link to files on different file systems, and if the original file is deleted, the soft link becomes broken. A hard link, on the other hand, is an additional directory entry for an existing file, which points to the same inode. Hard links cannot span different file systems and continue to function even if the original file is deleted, as long as the inode remains intact.",
+        "keywords": ["soft link", "hard link", "file system", "inode", "symbolic"]
+      },
+      {
+        "id": "os_m_20",
+        "question": "How does an operating system schedule tasks in a multi-core processor?",
+        "ideal_answer": "In a multi-core processor system, the operating system can schedule tasks across different CPU cores to maximize performance. Each core can execute different processes or threads in parallel, improving overall system throughput. The OS uses scheduling algorithms to allocate tasks based on factors like priority, CPU affinity, and load balancing. It may use strategies like processor affinity to keep processes on the same core for efficiency, or it may distribute tasks evenly across cores to prevent any core from being overloaded.",
+        "keywords": ["multi-core", "scheduling", "CPU cores", "affinity", "load balancing"]
+      }
+    ],
+    "hard": [
+      {
+        "id": "os_h_1",
+        "question": "What is the difference between a process and a thread, and how does the OS manage them?",
+        "ideal_answer": "A process is an independent program in execution, with its own address space, memory, and system resources, while a thread is a smaller unit of execution within a process that shares resources like memory space. The OS manages processes by allocating resources like CPU time, memory, and I/O. Threads are managed within a process using lightweight context switching. The OS uses scheduling algorithms to manage both processes and threads efficiently, and may utilize multi-threading and multi-core processors for better performance.",
+        "keywords": ["process", "thread", "resource management", "context switching", "scheduling"]
+      },
+      {
+        "id": "os_h_2",
+        "question": "Explain how deadlock occurs and describe the four necessary conditions for deadlock to happen.",
+        "ideal_answer": "Deadlock occurs when a set of processes are blocked because each process is holding a resource and waiting for another resource that is held by another process. The four necessary conditions for deadlock are: 1) Mutual Exclusion: At least one resource must be held in a non-shareable mode. 2) Hold and Wait: A process is holding at least one resource and is waiting to acquire additional resources. 3) No Preemption: Resources cannot be forcibly taken from processes holding them. 4) Circular Wait: A set of processes exist where each process is waiting for a resource held by another process in the set.",
+        "keywords": ["deadlock", "conditions", "mutual exclusion", "hold and wait", "no preemption", "circular wait"]
+      },
+      {
+        "id": "os_h_3",
+        "question": "What is virtual memory, and how does it improve system performance?",
+        "ideal_answer": "Virtual memory is a memory management technique that gives an application the illusion of having a large and contiguous block of memory, even if physical memory is fragmented. It enables the OS to use disk space as an extension of RAM, allowing it to run larger applications than the physical memory could accommodate. Virtual memory improves system performance by enabling multitasking, preventing memory conflicts, and providing a layer of abstraction between the physical and virtual address spaces.",
+        "keywords": ["virtual memory", "memory management", "paging", "address space", "system performance"]
+      },
+      {
+        "id": "os_h_4",
+        "question": "Describe the difference between preemptive and non-preemptive scheduling.",
+        "ideal_answer": "Preemptive scheduling allows the operating system to forcibly interrupt a running process and allocate CPU time to another process, even before the running process completes its execution. This ensures that high-priority processes get CPU time quickly. In non-preemptive scheduling, once a process starts executing, it runs to completion or until it voluntarily relinquishes control. Preemptive scheduling is generally used in modern OS for better responsiveness, while non-preemptive scheduling is simpler and used in systems where context switching is expensive.",
+        "keywords": ["preemptive scheduling", "non-preemptive scheduling", "context switching", "priority"]
+      },
+      {
+        "id": "os_h_5",
+        "question": "What is a memory leak, and how can an OS prevent it?",
+        "ideal_answer": "A memory leak occurs when a program allocates memory but fails to release it back to the OS after use, resulting in a gradual depletion of available memory. Over time, this can cause system performance degradation or crashes. OSes can prevent memory leaks through garbage collection mechanisms, reference counting, and memory management tools that track and deallocate unused memory, though the primary responsibility often lies with the application.",
+        "keywords": ["memory leak", "garbage collection", "memory management", "deallocation", "system performance"]
+      },
+      {
+        "id": "os_h_6",
+        "question": "Explain the concept of context switching in a multi-tasking OS.",
+        "ideal_answer": "Context switching is the process by which the OS saves the state of a currently running process and loads the state of another process. It involves saving the CPU register values, program counter, and other critical information of the current process and then restoring the same for the next process. Context switching is crucial for multitasking but can be costly in terms of time and performance due to the overhead involved.",
+        "keywords": ["context switching", "multi-tasking", "OS overhead", "CPU state", "performance"]
+      },
+      {
+        "id": "os_h_7",
+        "question": "What is the difference between a kernel mode and a user mode?",
+        "ideal_answer": "Kernel mode is the privileged mode in which the OS kernel executes. It has direct access to hardware resources and can perform sensitive operations like memory management and device I/O. User mode, on the other hand, is the mode in which application programs execute. In this mode, programs have restricted access to system resources to prevent unintended interference with the OS. Switching from user mode to kernel mode typically happens during system calls or interrupt handling.",
+        "keywords": ["kernel mode", "user mode", "privileged mode", "system calls", "security"]
+      },
+      {
+        "id": "os_h_8",
+        "question": "How does a file system handle file access and file permissions?",
+        "ideal_answer": "A file system manages the organization, storage, and retrieval of files on storage devices. File access is handled through system calls like open, read, write, and close. File permissions control access to files, typically through three primary actions: read, write, and execute. These permissions are assigned to the owner, group, and others. The OS uses access control lists (ACLs) or traditional Unix permissions (rwx) to manage these access levels.",
+        "keywords": ["file system", "file access", "permissions", "ACLs", "Unix"]
+      },
+      {
+        "id": "os_h_9",
+        "question": "What is RAID, and how does it improve data reliability and performance?",
+        "ideal_answer": "RAID (Redundant Array of Independent Disks) is a technology that combines multiple physical disk drives into one or more logical units to improve data redundancy, reliability, and performance. It uses various configurations or levels, such as RAID 0 (striping for performance), RAID 1 (mirroring for redundancy), and RAID 5 (striping with parity for both redundancy and performance). RAID improves reliability by ensuring that data is replicated or distributed across multiple drives, reducing the risk of data loss in case of hardware failure.",
+        "keywords": ["RAID", "data redundancy", "data reliability", "performance", "disk failure"]
+      },
+      {
+        "id": "os_h_10",
+        "question": "What is a race condition, and how can the OS handle it?",
+        "ideal_answer": "A race condition occurs when two or more processes or threads access shared resources concurrently, and the final outcome depends on the sequence of execution. The OS can handle race conditions through synchronization mechanisms like locks, semaphores, and mutexes. These tools ensure that only one process can access a critical section at a time, preventing data corruption or inconsistent results.",
+        "keywords": ["race condition", "synchronization", "mutex", "semaphore", "concurrency"]
+      },
+      {
+        "id": "os_h_11",
+        "question": "How does the OS implement inter-process communication (IPC), and why is it important?",
+        "ideal_answer": "IPC is a mechanism that allows processes to communicate and synchronize their actions. The OS implements IPC through methods like message passing, shared memory, semaphores, and pipes. It is crucial because it enables processes to share data, coordinate execution, and prevent data inconsistencies. IPC is essential in multi-process systems, where processes must collaborate to achieve complex tasks.",
+        "keywords": ["IPC", "message passing", "shared memory", "semaphore", "pipes"]
+      },
+      {
+        "id": "os_h_12",
+        "question": "Explain how the OS handles virtual memory paging and page replacement algorithms.",
+        "ideal_answer": "Paging is a memory management scheme that eliminates the need for contiguous memory allocation by dividing physical memory into fixed-sized blocks called pages. The OS maps virtual pages to physical frames using a page table. When a program accesses a page that is not in memory (page fault), the OS uses page replacement algorithms (such as FIFO, LRU, and Optimal) to decide which page to swap out of memory to make room for the required page.",
+        "keywords": ["paging", "virtual memory", "page replacement", "page fault", "LRU"]
+      },
+      {
+        "id": "os_h_13",
+        "question": "What is a semaphore, and how does it differ from a mutex?",
+        "ideal_answer": "A semaphore is a synchronization primitive used to control access to a common resource by multiple processes. It can be binary (like a mutex) or count-based, allowing more than one process to access the resource simultaneously. A mutex (short for mutual exclusion) is a binary semaphore that ensures exclusive access to a resource by locking it for one process at a time. The key difference is that semaphores can allow multiple processes, while mutexes allow only one process.",
+        "keywords": ["semaphore", "mutex", "synchronization", "mutual exclusion"]
+      },
+      {
+        "id": "os_h_14",
+        "question": "Explain the concept of microkernels and how they differ from monolithic kernels.",
+        "ideal_answer": "A microkernel is a minimalistic kernel architecture that only includes essential OS functions, such as process management and communication, while moving other services like device drivers, file systems, and networking into user space. This contrasts with a monolithic kernel, where all OS services run in kernel space. Microkernels are more modular and can be more secure and stable, as faults in user-space services don’t crash the kernel, but they can have higher communication overhead compared to monolithic kernels.",
+        "keywords": ["microkernel", "monolithic kernel", "kernel architecture", "modularity"]
+      },
+      {
+        "id": "os_h_15",
+        "question": "What are system calls, and why are they necessary for OS operations?",
+        "ideal_answer": "System calls are the mechanisms used by application programs to request services from the OS kernel, such as file operations, memory management, and process control. They are necessary because they provide a controlled interface between user applications and the underlying hardware, allowing for secure and efficient resource management. Without system calls, user programs would not be able to access kernel-level services directly.",
+        "keywords": ["system calls", "OS services", "kernel", "user applications"]
+      },
+      {
+        "id": "os_h_16",
+        "question": "What is the purpose of a deadlock detection algorithm, and how does it work?",
+        "ideal_answer": "A deadlock detection algorithm continuously checks for deadlock conditions in the system by examining the state of resource allocation and process wait conditions. The algorithm typically builds a wait-for graph or resource allocation graph to detect cycles, which indicate deadlock. Once deadlock is detected, the OS can take actions like aborting processes or preempting resources to break the deadlock.",
+        "keywords": ["deadlock detection", "algorithm", "resource allocation", "wait-for graph"]
+      },
+      {
+        "id": "os_h_17",
+        "question": "How does the OS ensure efficient CPU utilization in multi-core processors?",
+        "ideal_answer": "In multi-core systems, the OS utilizes load balancing and scheduling algorithms to ensure efficient CPU utilization. It assigns tasks or threads to different cores based on factors like processor affinity, workload distribution, and core utilization. The OS may also implement dynamic scheduling to adjust tasks based on real-time performance metrics, ensuring that no core is underutilized or overloaded.",
+        "keywords": ["CPU utilization", "multi-core", "load balancing", "scheduling", "affinity"]
+      },
+      {
+        "id": "os_h_18",
+        "question": "What is the difference between synchronous and asynchronous I/O, and when would each be used?",
+        "ideal_answer": "Synchronous I/O operations block the executing process until the I/O operation completes, while asynchronous I/O allows the process to continue executing while the I/O operation is being performed. Synchronous I/O is simpler to implement and is often used in applications where the result is needed immediately. Asynchronous I/O improves efficiency by allowing processes to continue working while waiting for I/O operations, making it ideal for high-performance applications where time is critical.",
+        "keywords": ["synchronous I/O", "asynchronous I/O", "blocking", "non-blocking"]
+      },
+      {
+        "id": "os_h_19",
+        "question": "What is a critical section, and how does the OS prevent race conditions in critical sections?",
+        "ideal_answer": "A critical section is a part of code where a shared resource is accessed or modified. The OS prevents race conditions by using synchronization mechanisms like locks, semaphores, or mutexes to ensure that only one process can execute the critical section at a time. This prevents multiple processes from interfering with each other and causing data corruption or inconsistency.",
+        "keywords": ["critical section", "race condition", "mutex", "lock", "semaphore"]
+      },
+      {
+        "id": "os_h_20",
+        "question": "How does an OS implement process synchronization in a multi-processor system?",
+        "ideal_answer": "In a multi-processor system, the OS implements process synchronization using mechanisms like locks, semaphores, and barriers to ensure that processes running on different processors do not interfere with each other. Synchronization primitives are designed to coordinate access to shared resources and prevent issues like race conditions and deadlocks. The OS also handles memory consistency and communication between processors to ensure correct execution of parallel processes.",
+        "keywords": ["process synchronization", "multi-processor", "locks", "semaphore", "race conditions"]
+      }
+    ]
+  }
+}
+
