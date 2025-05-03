@@ -1,8 +1,15 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const { authenticateTeacher } = require("../controllers/teacher.controller.js");
 
-// POST route for teacher authentication
-router.post("/authenticate", authenticateTeacher);
+const {
+  initializeSystem,
+  verifyFace,
+  registerFace
+} = require('../controllers/teacher.controller.js');
+
+// Routes
+router.get('/initialize', initializeSystem);
+router.post('/verify', verifyFace);
+router.post('/register', registerFace);
 
 module.exports = router;
