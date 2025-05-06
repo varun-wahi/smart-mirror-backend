@@ -7,6 +7,8 @@ const lightRoutes = require('./routes/light.routes.js');
 const cloudinaryRoutes = require('./routes/cloudinary.routes.js');
 require('dotenv').config();
 const cors = require("cors"); // Import cors
+const { spawn } = require('child_process');
+const path = require('path'); // Import path module
 // Initialize question banks
 require('./questionProvider').initializeQuestionBanks();
 
@@ -25,6 +27,58 @@ mongoose.connect(MONGO_URI, {
 })
 .then(() => console.log('MongoDB Atlas connected'))
 .catch(err => console.error('MongoDB connection error:', err));
+
+
+
+// Path to your Python script - update this to the correct path
+const pythonScriptPath = path.join(__dirname, 'controllers' ,'face_recognition', 'app.py');
+
+// Start the Python face recognition script as a child process
+let pythonProcess = null;
+
+function startPythonFaceRecognition() {
+  console.log('Starting face recognition service...');
+  
+  // Use python3 or python depending on your environment
+  pythonProcess = spawn('python3.10', [pythonScriptPath]);
+  
+  // Handle Python process output
+  pythonProcess.stdout.on('data', (data) => {
+    console.log(`Face Recognition: ${data.toString().trim()}`);
+  });
+  
+  pythonProcess.stderr.on('data', (data) => {
+    console.error(`Face Recognition Error: ${data.toString().trim()}`);
+  });
+  
+  pythonProcess.on('close', (code) => {
+    console.log(`Face recognition process exited with code ${code}`);
+    
+    // Optionally restart if it crashes
+    if (code !== 0 && code !== null) {
+      console.log('Attempting to restart face recognition...');
+      setTimeout(startPythonFaceRecognition, 5000); // Wait 5 seconds before restarting
+    }
+  });
+  
+  pythonProcess.on('error', (err) => {
+    console.error('Failed to start face recognition process:', err);
+  });
+}
+
+// Start the Python process when Node.js server starts
+startPythonFaceRecognition();
+
+// Gracefully handle shutdown and kill Python process when Node.js exits
+process.on('SIGINT', () => {
+  console.log('Shutting down server...');
+  if (pythonProcess) {
+    console.log('Terminating face recognition process...');
+    pythonProcess.kill();
+  }
+  process.exit(0);
+});
+
 
 // Default Route to Check Server
 app.get('/', (req, res) => {

@@ -249,7 +249,7 @@ const analyzeInterview = async (req, res) => {
         }
 
         // Get the model
-        const model = genAI.getGenerativeModel({ model: "gemini-2.0-pro" }); // Using Pro model for more complex analysis
+        const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" }); // Using Pro model for more complex analysis
 
         // Prepare the Q&A pairs for analysis
         const qaPairs = questions.map((q, index) => {
