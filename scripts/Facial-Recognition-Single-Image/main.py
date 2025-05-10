@@ -82,7 +82,7 @@ def find_working_camera(max_tested=10):
     return None
 
 # === Setup ===
-faces_directory = "/home/smartmirror/Desktop/SmartMirror/smart-mirror-backend/scripts/Facial-Recognition-Single-Image/faces"
+faces_directory = "/home/smartmirror/Desktop/SmartMirror/backend/scripts/Facial-Recognition-Single-Image/faces"
 print(f"Loading faces from directory: {faces_directory}")
 known_face_encodings, known_face_names = load_face_encodings_from_directory(faces_directory)
 
