@@ -40,7 +40,9 @@ function startPythonFaceRecognition() {
   console.log('Starting face recognition service...');
   
   // Use python3 or python depending on your environment
-  pythonProcess = spawn('python3.10', [pythonScriptPath]);
+  // pythonProcess = spawn('python3.10', [pythonScriptPath]);
+  pythonProcess = spawn('python', [pythonScriptPath]);
+
   
   // Handle Python process output
   pythonProcess.stdout.on('data', (data) => {

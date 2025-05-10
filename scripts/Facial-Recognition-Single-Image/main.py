@@ -65,9 +65,8 @@ def load_face_encodings_from_directory(directory_path):
     
     return known_face_encodings, known_face_names
 
-# Directory containing face images
-faces_directory = "/Users/varunwahi/Development/Interview_Prep/frontend/src/controlApp/scripts/Facial-Recognition-Single-Image/faces"
-
+# faces_directory = "/Users/varunwahi/Development/Interview_Prep/frontend/src/controlApp/scripts/Facial-Recognition-Single-Image/faces"
+faces_directory = "/home/smartmirror/Desktop/SmartMirror/Backend/smart-mirror-backend/scripts/Facial-Recognition-Single-Image/faces"
 # Load known face encodings and names from directory
 print(f"Loading faces from directory: {faces_directory}")
 known_face_encodings, known_face_names = load_face_encodings_from_directory(faces_directory)
@@ -79,8 +78,23 @@ if not known_face_encodings:
 else:
     print(f"Successfully loaded {len(known_face_encodings)} reference faces.")
 
+def find_working_camera(max_tested=10):
+    for i in range(max_tested):
+        cap = cv2.VideoCapture(i)
+        if cap.isOpened():
+            print(f"Camera found at index {i}")
+            return i
+        cap.release()
+    print("No working camera found.")
+    return None
+
+camera_index = find_working_camera()
+if camera_index is None:
+    exit()
+
+video_capture = cv2.VideoCapture(camera_index)
 # Initialize webcam
-video_capture = cv2.VideoCapture(0)
+# video_capture = cv2.VideoCapture(0)
 if not video_capture.isOpened():
     print("Error: Could not open video capture device")
     exit()
