@@ -1,0 +1,14 @@
+[Unit]
+Description=Face Recognition API Service
+After=network.target
+
+[Service]
+User=smartmirror
+WorkingDirectory=/home/smartmirror/Desktop/SmartMirror/smart-mirror-backend
+ExecStart=/usr/bin/python3 /home/smartmirror/Desktop/SmartMirror/smart-mirror-backend/face_recognition_backend.py
+Restart=always
+RestartSec=3
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=multi-user.target
