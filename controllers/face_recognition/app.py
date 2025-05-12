@@ -256,6 +256,10 @@ def shutdown():
     os.system("sudo shutdown now")
     return jsonify({"status": "Shutting down..."})
 
+@app.route('/reboot', methods=['POST'])
+def reboot():
+    os.system("sudo reboot now")
+    return jsonify({"status": "Rebooting..."})
 
 
 
