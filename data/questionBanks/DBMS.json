@@ -1,0 +1,371 @@
+{
+  "topic": "DBMS",
+  "questions": {
+    "easy": [
+      {
+        "id": "dbms_e_01",
+        "question": "What does DBMS stand for?",
+        "ideal_answer": "DBMS stands for Database Management System. It is software that is used to store and manage databases.",
+        "keywords": ["DBMS"]
+      },
+      {
+        "id": "dbms_e_02",
+        "question": "What is a primary key in a database?",
+        "ideal_answer": "A primary key is a field or a combination of fields that uniquely identifies each record in a table.",
+        "keywords": ["primary key"]
+      },
+      {
+        "id": "dbms_e_03",
+        "question": "What is SQL?",
+        "ideal_answer": "SQL (Structured Query Language) is a standard programming language designed for managing and manipulating relational databases.",
+        "keywords": ["SQL", "Structured Query Language"]
+      },
+      {
+        "id": "dbms_e_04",
+        "question": "What is the difference between a database and a DBMS?",
+        "ideal_answer": "A database is an organized collection of data, while a DBMS is the software that enables users to create, retrieve, update, and manage that data in a database.",
+        "keywords": ["database", "DBMS", "difference"]
+      },
+      {
+        "id": "dbms_e_05",
+        "question": "What is a foreign key?",
+        "ideal_answer": "A foreign key is a field in one table that refers to the primary key in another table, establishing a relationship between the two tables.",
+        "keywords": ["foreign key", "relationship"]
+      },
+      {
+        "id": "dbms_e_06",
+        "question": "What is a schema in a database?",
+        "ideal_answer": "A schema is a logical container for database objects like tables, views, and procedures that defines how data is organized and how relationships are enforced.",
+        "keywords": ["schema"]
+      },
+      {
+        "id": "dbms_e_07",
+        "question": "What are the basic data types in SQL?",
+        "ideal_answer": "Basic SQL data types include INTEGER, FLOAT, CHAR, VARCHAR, DATE, TIMESTAMP, BOOLEAN, and DECIMAL.",
+        "keywords": ["data types", "SQL"]
+      },
+      {
+        "id": "dbms_e_08",
+        "question": "What is a NULL value in a database?",
+        "ideal_answer": "NULL represents the absence of a value or an unknown value in a database field. It is not the same as zero or an empty string.",
+        "keywords": ["NULL", "value"]
+      },
+      {
+        "id": "dbms_e_09",
+        "question": "What is a query in database terms?",
+        "ideal_answer": "A query is a request for data or information from a database, typically written in SQL, that retrieves specific data based on certain criteria.",
+        "keywords": ["query"]
+      },
+      {
+        "id": "dbms_e_10",
+        "question": "What is a table in a relational database?",
+        "ideal_answer": "A table is a collection of related data organized in rows (records) and columns (fields) in a relational database.",
+        "keywords": ["table", "relational database"]
+      },
+      {
+        "id": "dbms_e_11",
+        "question": "What is DDL in SQL?",
+        "ideal_answer": "DDL (Data Definition Language) is a subset of SQL used to define and modify database structure and schema, including commands like CREATE, ALTER, and DROP.",
+        "keywords": ["DDL", "Data Definition Language"]
+      },
+      {
+        "id": "dbms_e_12",
+        "question": "What is DML in SQL?",
+        "ideal_answer": "DML (Data Manipulation Language) is a subset of SQL used to manipulate data stored in the database, including commands like SELECT, INSERT, UPDATE, and DELETE.",
+        "keywords": ["DML", "Data Manipulation Language"]
+      },
+      {
+        "id": "dbms_e_13",
+        "question": "What is an attribute in a database?",
+        "ideal_answer": "An attribute is a column or field in a database table that represents a specific characteristic or property of the entity represented by that table.",
+        "keywords": ["attribute", "column", "field"]
+      },
+      {
+        "id": "dbms_e_14",
+        "question": "What is a tuple in a relational database?",
+        "ideal_answer": "A tuple is a single row or record in a relational database table that represents one instance of the entity described by that table.",
+        "keywords": ["tuple", "row", "record"]
+      },
+      {
+        "id": "dbms_e_15",
+        "question": "What is a view in a database?",
+        "ideal_answer": "A view is a virtual table derived from one or more actual tables. It shows only the data specified in its definition and can simplify complex queries and enhance security.",
+        "keywords": ["view", "virtual table"]
+      },
+      {
+        "id": "dbms_e_16",
+        "question": "What is normalization in database design?",
+        "ideal_answer": "Normalization is the process of organizing data in a database to reduce redundancy and improve data integrity by dividing large tables into smaller, related tables.",
+        "keywords": ["normalization", "database design"]
+      },
+      {
+        "id": "dbms_e_17",
+        "question": "What is an index in a database?",
+        "ideal_answer": "An index is a database structure that improves the speed of data retrieval operations by providing faster access to rows in a table, similar to an index in a book.",
+        "keywords": ["index", "speed", "retrieval"]
+      },
+      {
+        "id": "dbms_e_18",
+        "question": "What is the SELECT statement used for in SQL?",
+        "ideal_answer": "The SELECT statement is used to retrieve data from one or more tables in a database. It allows you to specify which columns to retrieve and filter the results using various conditions.",
+        "keywords": ["SELECT", "retrieve", "SQL"]
+      },
+      {
+        "id": "dbms_e_19",
+        "question": "What is a database constraint?",
+        "ideal_answer": "A database constraint is a rule that restricts the values that can be inserted into a table, ensuring data integrity. Common constraints include NOT NULL, UNIQUE, PRIMARY KEY, FOREIGN KEY, and CHECK.",
+        "keywords": ["constraint", "data integrity"]
+      },
+      {
+        "id": "dbms_e_20",
+        "question": "What is the difference between DELETE and TRUNCATE commands?",
+        "ideal_answer": "DELETE removes specific rows based on a condition and logs each deletion, while TRUNCATE removes all rows from a table in a single operation, resets identity counters, and logs only the page deallocations.",
+        "keywords": ["DELETE", "TRUNCATE", "difference"]
+      }
+    ],
+    "medium": [
+      {
+        "id": "dbms_m_01",
+        "question": "What is the difference between clustered and non-clustered indexes?",
+        "ideal_answer": "A clustered index sorts and stores the data rows in the table based on the index key, while a non-clustered index stores a pointer to the data.",
+        "keywords": ["clustered index", "non-clustered index"]
+      },
+      {
+        "id": "dbms_m_02",
+        "question": "Explain the concept of ACID properties in database transactions.",
+        "ideal_answer": "ACID stands for Atomicity (transactions are all-or-nothing), Consistency (transactions bring the database from one valid state to another), Isolation (concurrent transactions don't interfere with each other), and Durability (completed transactions persist even after system failure).",
+        "keywords": ["ACID", "transactions", "atomicity", "consistency", "isolation", "durability"]
+      },
+      {
+        "id": "dbms_m_03",
+        "question": "What is denormalization and when might it be useful?",
+        "ideal_answer": "Denormalization is the process of adding redundant data to normalized database tables to improve read performance. It's useful when read operations significantly outnumber writes and when complex joins impact performance negatively.",
+        "keywords": ["denormalization", "performance", "redundancy"]
+      },
+      {
+        "id": "dbms_m_04",
+        "question": "What is a stored procedure and what are its advantages?",
+        "ideal_answer": "A stored procedure is a prepared SQL code that can be saved and reused. Advantages include improved performance, reduced network traffic, code reusability, enhanced security, and maintaining business logic at the database level.",
+        "keywords": ["stored procedure", "performance", "reusability"]
+      },
+      {
+        "id": "dbms_m_05",
+        "question": "What is database sharding?",
+        "ideal_answer": "Database sharding is a horizontal partitioning technique that splits a large database into smaller, faster, more manageable pieces called shards, which are distributed across multiple servers or locations.",
+        "keywords": ["sharding", "horizontal partitioning", "scalability"]
+      },
+      {
+        "id": "dbms_m_06",
+        "question": "Explain the concept of database normalization forms (1NF, 2NF, 3NF).",
+        "ideal_answer": "1NF eliminates repeating groups by ensuring atomic values; 2NF removes partial dependencies by ensuring all non-key attributes depend on the entire primary key; 3NF eliminates transitive dependencies by ensuring non-key attributes don't depend on other non-key attributes.",
+        "keywords": ["normalization forms", "1NF", "2NF", "3NF"]
+      },
+      {
+        "id": "dbms_m_07",
+        "question": "What is a transaction in a database?",
+        "ideal_answer": "A transaction is a sequence of one or more SQL operations executed as a single unit of work that either completes entirely or not at all, maintaining database integrity even during system failures.",
+        "keywords": ["transaction", "unit of work", "integrity"]
+      },
+      {
+        "id": "dbms_m_08",
+        "question": "What are database triggers and when would you use them?",
+        "ideal_answer": "Triggers are special stored procedures that automatically execute in response to certain events on a table or view, such as INSERT, UPDATE, or DELETE. They're used for maintaining data integrity, auditing changes, and implementing business rules.",
+        "keywords": ["triggers", "automatic execution", "events"]
+      },
+      {
+        "id": "dbms_m_09",
+        "question": "What is a deadlock in database systems and how can it be prevented?",
+        "ideal_answer": "A deadlock occurs when two or more transactions are waiting for each other to release locks, resulting in none being able to proceed. Prevention methods include consistent lock ordering, timeout mechanisms, deadlock detection algorithms, and using isolation levels that avoid locks.",
+        "keywords": ["deadlock", "locks", "prevention"]
+      },
+      {
+        "id": "dbms_m_10",
+        "question": "What is the difference between OLTP and OLAP systems?",
+        "ideal_answer": "OLTP (Online Transaction Processing) systems handle daily operational tasks with many small transactions focusing on data insertion and updates. OLAP (Online Analytical Processing) systems support complex data analysis with fewer, larger queries focused on data retrieval for decision-making.",
+        "keywords": ["OLTP", "OLAP", "transaction", "analytical"]
+      },
+      {
+        "id": "dbms_m_11",
+        "question": "What is a composite key in a database?",
+        "ideal_answer": "A composite key is a primary key that consists of two or more columns combined to uniquely identify each record in a table when no single column can serve as a unique identifier.",
+        "keywords": ["composite key", "multiple columns", "unique identifier"]
+      },
+      {
+        "id": "dbms_m_12",
+        "question": "Explain the concept of database partitioning.",
+        "ideal_answer": "Database partitioning divides large tables into smaller, more manageable pieces called partitions, while maintaining them as part of a single logical table. This improves performance, makes maintenance easier, and allows for better data distribution across storage resources.",
+        "keywords": ["partitioning", "performance", "management"]
+      },
+      {
+        "id": "dbms_m_13",
+        "question": "What is a cursor in database programming?",
+        "ideal_answer": "A cursor is a database object used to retrieve, update, or delete multiple rows from a result set one row at a time, allowing row-by-row processing in contexts where set-based operations aren't suitable.",
+        "keywords": ["cursor", "row-by-row", "processing"]
+      },
+      {
+        "id": "dbms_m_14",
+        "question": "What is a materialized view and how does it differ from a regular view?",
+        "ideal_answer": "A materialized view stores the query results physically, unlike a regular view which computes results each time it's accessed. Materialized views provide faster data access but require storage space and need refreshing when source data changes.",
+        "keywords": ["materialized view", "stored results", "performance"]
+      },
+      {
+        "id": "dbms_m_15",
+        "question": "What are the different types of joins in SQL?",
+        "ideal_answer": "SQL joins include INNER JOIN (returns matches from both tables), LEFT JOIN (all rows from left table and matching from right), RIGHT JOIN (all rows from right table and matching from left), FULL JOIN (all rows when there's a match in either), and CROSS JOIN (Cartesian product of both tables).",
+        "keywords": ["joins", "INNER", "LEFT", "RIGHT", "FULL", "CROSS"]
+      },
+      {
+        "id": "dbms_m_16",
+        "question": "What is database replication and what are its benefits?",
+        "ideal_answer": "Database replication is the process of copying and maintaining database objects in multiple databases. Benefits include improved availability, fault tolerance, load balancing, and geographic distribution of data for better performance.",
+        "keywords": ["replication", "availability", "fault tolerance"]
+      },
+      {
+        "id": "dbms_m_17",
+        "question": "Explain the CAP theorem in distributed database systems.",
+        "ideal_answer": "The CAP theorem states that a distributed database system can only guarantee two of three properties simultaneously: Consistency (all nodes see the same data), Availability (every request receives a response), and Partition tolerance (system continues functioning despite network partitions).",
+        "keywords": ["CAP theorem", "consistency", "availability", "partition tolerance"]
+      },
+      {
+        "id": "dbms_m_18",
+        "question": "What is a B-tree index and why is it commonly used in databases?",
+        "ideal_answer": "A B-tree index is a self-balancing tree data structure that maintains sorted data and allows searches, insertions, and deletions in logarithmic time. It's commonly used in databases because it efficiently handles large amounts of data and works well with disk-based storage systems.",
+        "keywords": ["B-tree", "index", "balanced", "performance"]
+      },
+      {
+        "id": "dbms_m_19",
+        "question": "What is database connection pooling?",
+        "ideal_answer": "Connection pooling is a technique of creating and maintaining a collection of reusable database connections that can be shared among multiple clients. It improves performance by reducing the overhead of establishing new connections for each database operation.",
+        "keywords": ["connection pooling", "performance", "reusable connections"]
+      },
+      {
+        "id": "dbms_m_20",
+        "question": "What is the purpose of the HAVING clause in SQL?",
+        "ideal_answer": "The HAVING clause is used to filter groups in a GROUP BY query based on aggregate function results. Unlike WHERE, which filters individual rows before grouping, HAVING filters after rows are grouped, allowing conditions on aggregate values.",
+        "keywords": ["HAVING", "GROUP BY", "aggregate", "filter"]
+      }
+    ],
+    "hard": [
+      {
+        "id": "dbms_h_01",
+        "question": "Explain the concept of multiversion concurrency control (MVCC).",
+        "ideal_answer": "MVCC allows multiple versions of data items to exist to provide concurrent access without locking. It ensures consistency and isolation by maintaining snapshots of data for each transaction.",
+        "keywords": ["MVCC", "concurrency"]
+      },
+      {
+        "id": "dbms_h_02",
+        "question": "What is the difference between optimistic and pessimistic locking in databases?",
+        "ideal_answer": "Pessimistic locking prevents access to a record while it's being updated by acquiring exclusive locks. Optimistic locking allows multiple users to access data simultaneously but validates at commit time that no other transaction has modified the data, typically using version numbers or timestamps.",
+        "keywords": ["optimistic locking", "pessimistic locking", "concurrency control"]
+      },
+      {
+        "id": "dbms_h_03",
+        "question": "Explain the concept of database isolation levels and their trade-offs.",
+        "ideal_answer": "Isolation levels (Read Uncommitted, Read Committed, Repeatable Read, and Serializable) define how transaction integrity is visible to other users. Lower levels offer better performance but allow data phenomena (dirty reads, non-repeatable reads, phantom reads); higher levels provide stronger guarantees but may reduce concurrency.",
+        "keywords": ["isolation levels", "concurrency", "ACID", "phenomena"]
+      },
+      {
+        "id": "dbms_h_04",
+        "question": "What is eventual consistency in distributed databases?",
+        "ideal_answer": "Eventual consistency is a consistency model that guarantees that, if no new updates are made to a given data item, eventually all accesses to that item will return the last updated value. It prioritizes availability over immediate consistency in distributed systems.",
+        "keywords": ["eventual consistency", "distributed", "CAP theorem"]
+      },
+      {
+        "id": "dbms_h_05",
+        "question": "Explain the concept of database query optimization and the role of query execution plans.",
+        "ideal_answer": "Query optimization is the process of selecting the most efficient execution plan for a query. The query optimizer evaluates multiple possible plans, estimates their costs based on statistics and algorithms, and selects the one with the lowest estimated cost. Execution plans show the sequence of operations used to retrieve data.",
+        "keywords": ["query optimization", "execution plan", "cost-based"]
+      },
+      {
+        "id": "dbms_h_06",
+        "question": "What are the challenges of implementing horizontal database sharding and how can they be addressed?",
+        "ideal_answer": "Challenges include distributed transactions, maintaining referential integrity across shards, rebalancing data, query routing complexity, and handling joins across shards. Solutions include consistent hashing, denormalization, distributed transaction protocols, sharding middleware, and global transaction IDs.",
+        "keywords": ["sharding challenges", "distributed", "scalability"]
+      },
+      {
+        "id": "dbms_h_07",
+        "question": "Explain the concept of Write-Ahead Logging (WAL) and its importance in database recovery.",
+        "ideal_answer": "Write-Ahead Logging ensures that log records describing database modifications are written to persistent storage before the actual data changes are made. This allows the database to recover to a consistent state after a crash by replaying or undoing transactions from the log.",
+        "keywords": ["WAL", "recovery", "durability", "logging"]
+      },
+      {
+        "id": "dbms_h_08",
+        "question": "What is a database transaction log and how is it used for point-in-time recovery?",
+        "ideal_answer": "A transaction log records all database modifications in sequence. For point-in-time recovery, the system restores a full backup and then replays transaction logs up to the desired recovery point, allowing the database to be restored to any moment in time for which logs exist.",
+        "keywords": ["transaction log", "point-in-time recovery", "backup"]
+      },
+      {
+        "id": "dbms_h_09",
+        "question": "Explain the differences between star schema and snowflake schema in data warehousing.",
+        "ideal_answer": "Star schema has dimension tables connected directly to a central fact table with no normalization of dimensions. Snowflake schema normalizes dimension tables into multiple related tables, creating a more complex structure. Star schemas are simpler and typically perform better for queries, while snowflake schemas reduce redundancy and save storage.",
+        "keywords": ["star schema", "snowflake schema", "data warehouse", "dimensional modeling"]
+      },
+      {
+        "id": "dbms_h_10",
+        "question": "What are the challenges of maintaining ACID properties in distributed database systems?",
+        "ideal_answer": "Challenges include network latency affecting atomicity, distributed transaction coordination, consistency across nodes during network partitions, isolation requiring distributed locking mechanisms, and ensuring durability across multiple storage locations. Solutions include two-phase commit protocols, consensus algorithms, and distributed transaction managers.",
+        "keywords": ["distributed ACID", "consistency", "two-phase commit"]
+      },
+      {
+        "id": "dbms_h_11",
+        "question": "Explain the concept of database normalization vs. denormalization trade-offs in real-world applications.",
+        "ideal_answer": "Normalization reduces redundancy and ensures data integrity but requires complex joins that impact query performance. Denormalization improves read performance by adding redundancy but complicates updates and increases storage. The optimal balance depends on workload characteristics, with OLTP systems favoring normalization and OLAP/reporting systems often using denormalization.",
+        "keywords": ["normalization", "denormalization", "performance", "integrity"]
+      },
+      {
+        "id": "dbms_h_12",
+        "question": "What is a column-store database and when would you use it instead of a row-store?",
+        "ideal_answer": "Column-store databases physically organize data by columns rather than rows, enabling better compression ratios and allowing queries to read only relevant columns. They excel at analytical workloads with queries that scan many rows but few columns, while row-stores are better for OLTP workloads with selective queries and frequent updates to entire records.",
+        "keywords": ["column-store", "row-store", "analytics", "compression"]
+      },
+      {
+        "id": "dbms_h_13",
+        "question": "Explain the concept of database consistency models in distributed systems.",
+        "ideal_answer": "Consistency models define rules for the apparent order and visibility of updates in distributed systems. Strong consistency models (like linearizability) ensure all nodes see the same data in the same order but sacrifice availability. Weaker models (like eventual, causal, or session consistency) offer better performance and availability but provide fewer guarantees about data visibility.",
+        "keywords": ["consistency models", "distributed", "linearizability", "causal consistency"]
+      },
+      {
+        "id": "dbms_h_14",
+        "question": "What is a consensus algorithm in distributed databases and how does it work?",
+        "ideal_answer": "Consensus algorithms enable distributed database nodes to agree on a single data value or transaction order despite potential failures. Algorithms like Paxos and Raft work through leader election, proposal broadcasting, and majority voting to ensure agreement, consistency, and fault tolerance across distributed systems.",
+        "keywords": ["consensus algorithm", "Paxos", "Raft", "distributed agreement"]
+      },
+      {
+        "id": "dbms_h_15",
+        "question": "How do database systems implement MVCC (Multiversion Concurrency Control) differently?",
+        "ideal_answer": "PostgreSQL uses tuple versioning where each row has visible/invisible versions based on transaction IDs. Oracle uses rollback segments to store before-images of modified data. MySQL's InnoDB uses undo logs for version reconstruction. Key differences include version storage approach, cleanup mechanisms (vacuum vs. purge), and how read consistency is maintained across transactions.",
+        "keywords": ["MVCC implementation", "versioning", "snapshot isolation", "garbage collection"]
+      },
+      {
+        "id": "dbms_h_16",
+        "question": "Explain the concept of database index selectivity and its impact on query performance.",
+        "ideal_answer": "Index selectivity is the ratio of unique values to total values in an indexed column. High selectivity (many unique values) makes indexes more effective as they narrow down results significantly. Low selectivity indexes may be ignored by the optimizer as full table scans become more efficient. Query plans and performance are directly impacted by the optimizer's selectivity estimates.",
+        "keywords": ["index selectivity", "cardinality", "query optimization", "statistics"]
+      },
+      {
+        "id": "dbms_h_17",
+        "question": "What are the principles and challenges of implementing database constraints in a microservices architecture?",
+        "ideal_answer": "Principles include using local transactions within services, eventual consistency between services, and compensating transactions for rollbacks. Challenges include maintaining referential integrity across service boundaries, handling distributed transactions, ensuring data consistency with asynchronous communication, and implementing complex business rules across multiple databases.",
+        "keywords": ["microservices", "distributed constraints", "eventual consistency", "saga pattern"]
+      },
+      {
+        "id": "dbms_h_18",
+        "question": "Explain the concept and implementation of database buffer pools and their impact on performance.",
+        "ideal_answer": "Buffer pools are memory areas that cache database pages from disk. They improve performance by reducing physical I/O operations. Implementation involves page replacement algorithms (like LRU), dirty page tracking, write-ahead logging, and prefetching mechanisms. Performance is affected by buffer pool size, replacement policy efficiency, and memory pressure from concurrent operations.",
+        "keywords": ["buffer pool", "caching", "page replacement", "memory management"]
+      },
+      {
+        "id": "dbms_h_19",
+        "question": "What is the time-series data model and what database design considerations are specific to time-series databases?",
+        "ideal_answer": "Time-series data models organize data points by timestamps in chronological order. Design considerations include time-based partitioning, downsampling/aggregation strategies, efficient append-only storage, specialized indexing for time ranges, and retention policies. Time-series databases optimize for high write throughput, time-range queries, and storage compression.",
+        "keywords": ["time-series", "temporal data", "partitioning", "downsampling"]
+      },
+      {
+        "id": "dbms_h_20",
+        "question": "Explain the concepts and implementation of database change data capture (CDC) systems.",
+        "ideal_answer": "CDC systems capture and deliver changes made to database data for downstream processing. Implementation methods include log-based (reading database transaction logs), trigger-based (using database triggers), and query-based approaches. CDC systems support data integration, replication, event sourcing, audit trails, and real-time analytics while minimizing performance impact on source systems.",
+        "keywords": ["CDC", "change data capture", "event sourcing", "transaction log"]
+      }
+    ]
+  }
+}

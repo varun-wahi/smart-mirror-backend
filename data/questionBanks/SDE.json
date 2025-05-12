@@ -1,0 +1,371 @@
+{
+  "topic": "SDE",
+  "questions": {
+    "easy": [
+      {
+        "id": "sde_e_01",
+        "question": "What is the difference between a stack and a queue?",
+        "ideal_answer": "A stack is LIFO (Last In First Out), whereas a queue is FIFO (First In First Out).",
+        "keywords": ["stack", "queue", "LIFO", "FIFO"]
+      },
+      {
+        "id": "sde_e_02",
+        "question": "What is an array?",
+        "ideal_answer": "An array is a collection of elements stored at contiguous memory locations and accessed using an index.",
+        "keywords": ["array", "contiguous memory", "index"]
+      },
+      {
+        "id": "sde_e_03",
+        "question": "What does the 'public' keyword mean in Java?",
+        "ideal_answer": "'public' means the method or variable can be accessed from any other class.",
+        "keywords": ["Java", "public", "access modifier"]
+      },
+      {
+        "id": "sde_e_04",
+        "question": "What is a null pointer exception?",
+        "ideal_answer": "It occurs when you try to access a method or variable on a null object reference.",
+        "keywords": ["null pointer", "exception", "runtime"]
+      },
+      {
+        "id": "sde_e_05",
+        "question": "What is the difference between == and .equals() in Java?",
+        "ideal_answer": "== checks for reference equality; .equals() checks for value equality.",
+        "keywords": ["Java", "==", "equals", "comparison"]
+      },
+      {
+        "id": "sde_e_06",
+        "question": "What is a constructor?",
+        "ideal_answer": "A constructor is a special method used to initialize objects.",
+        "keywords": ["constructor", "object", "initialization"]
+      },
+      {
+        "id": "sde_e_07",
+        "question": "What is a function?",
+        "ideal_answer": "A function is a reusable block of code that performs a specific task.",
+        "keywords": ["function", "code reuse", "task"]
+      },
+      {
+        "id": "sde_e_08",
+        "question": "What is a loop?",
+        "ideal_answer": "A loop is a programming construct that repeats a block of code while a condition is true.",
+        "keywords": ["loop", "iteration", "condition"]
+      },
+      {
+        "id": "sde_e_09",
+        "question": "What is recursion?",
+        "ideal_answer": "Recursion is a process where a function calls itself to solve smaller instances of a problem.",
+        "keywords": ["recursion", "function", "base case"]
+      },
+      {
+        "id": "sde_e_10",
+        "question": "What is the use of the 'break' statement?",
+        "ideal_answer": "The 'break' statement is used to exit a loop or switch case early.",
+        "keywords": ["break", "loop", "control flow"]
+      },
+      {
+        "id": "sde_e_11",
+        "question": "What is a variable?",
+        "ideal_answer": "A variable is a named container for storing data values.",
+        "keywords": ["variable", "data", "storage"]
+      },
+      {
+        "id": "sde_e_12",
+        "question": "What is a data type?",
+        "ideal_answer": "A data type defines the kind of data a variable can store (e.g., int, float, char).",
+        "keywords": ["data type", "variable", "type"]
+      },
+      {
+        "id": "sde_e_13",
+        "question": "What is a syntax error?",
+        "ideal_answer": "A syntax error occurs when code violates the grammar of the programming language.",
+        "keywords": ["syntax error", "code", "grammar"]
+      },
+      {
+        "id": "sde_e_14",
+        "question": "What is an IDE?",
+        "ideal_answer": "An IDE (Integrated Development Environment) is software that provides tools like code editor, debugger, and compiler in one place.",
+        "keywords": ["IDE", "code editor", "debugger", "compiler"]
+      },
+      {
+        "id": "sde_e_15",
+        "question": "What is the output of 5 % 2?",
+        "ideal_answer": "The output is 1, because 5 divided by 2 leaves a remainder of 1.",
+        "keywords": ["modulus", "remainder", "% operator"]
+      },
+      {
+        "id": "sde_e_16",
+        "question": "What is object-oriented programming?",
+        "ideal_answer": "OOP is a programming paradigm based on the concept of objects containing data and methods.",
+        "keywords": ["OOP", "objects", "methods", "paradigm"]
+      },
+      {
+        "id": "sde_e_17",
+        "question": "What is inheritance?",
+        "ideal_answer": "Inheritance allows a class to acquire the properties and behaviors of another class.",
+        "keywords": ["inheritance", "class", "OOP"]
+      },
+      {
+        "id": "sde_e_18",
+        "question": "What is the purpose of comments in code?",
+        "ideal_answer": "Comments are used to explain and document code for better understanding.",
+        "keywords": ["comments", "documentation", "readability"]
+      },
+      {
+        "id": "sde_e_19",
+        "question": "What is an IDE example?",
+        "ideal_answer": "Examples of IDEs include IntelliJ IDEA, Visual Studio Code, and Eclipse.",
+        "keywords": ["IDE", "IntelliJ", "VS Code", "Eclipse"]
+      },
+      {
+        "id": "sde_e_20",
+        "question": "What is the output of 'true && false'?",
+        "ideal_answer": "The output is false, because the logical AND operator requires both conditions to be true.",
+        "keywords": ["logical AND", "true", "false", "boolean"]
+      }
+    ],
+    "medium": [
+      {
+        "id": "sde_m_01",
+        "question": "What is the time complexity of accessing an element in an array?",
+        "ideal_answer": "The time complexity of accessing an element in an array is O(1) because arrays provide direct access using an index.",
+        "keywords": ["time complexity", "array", "access"]
+      },
+      {
+        "id": "sde_m_02",
+        "question": "Explain the difference between a linked list and an array.",
+        "ideal_answer": "An array provides constant-time access but requires contiguous memory, while a linked list allows dynamic memory allocation but has slower access time as elements must be traversed sequentially.",
+        "keywords": ["linked list", "array", "memory", "access"]
+      },
+      {
+        "id": "sde_m_03",
+        "question": "What is the difference between a deep copy and a shallow copy?",
+        "ideal_answer": "A shallow copy copies references to the objects, while a deep copy duplicates the objects themselves, recursively copying all nested objects.",
+        "keywords": ["deep copy", "shallow copy", "reference", "object"]
+      },
+      {
+        "id": "sde_m_04",
+        "question": "What are the different types of inheritance in object-oriented programming?",
+        "ideal_answer": "The types of inheritance are single inheritance, multiple inheritance, multilevel inheritance, hierarchical inheritance, and hybrid inheritance.",
+        "keywords": ["inheritance", "OOP", "single inheritance", "multiple inheritance"]
+      },
+      {
+        "id": "sde_m_05",
+        "question": "What is the purpose of the 'this' keyword in Java?",
+        "ideal_answer": "'this' refers to the current object instance. It is used to differentiate between instance variables and parameters with the same name, and to call constructors.",
+        "keywords": ["this", "Java", "current object", "constructor"]
+      },
+      {
+        "id": "sde_m_06",
+        "question": "What is the difference between synchronous and asynchronous programming?",
+        "ideal_answer": "Synchronous programming executes tasks sequentially, blocking the execution of subsequent tasks until the current task finishes. Asynchronous programming allows tasks to run concurrently, improving efficiency and responsiveness.",
+        "keywords": ["synchronous", "asynchronous", "programming", "task execution"]
+      },
+      {
+        "id": "sde_m_07",
+        "question": "Explain the concept of a hash table.",
+        "ideal_answer": "A hash table is a data structure that stores key-value pairs. It uses a hash function to compute an index in an array of buckets or slots, from which the corresponding value can be found.",
+        "keywords": ["hash table", "key-value", "hash function"]
+      },
+      {
+        "id": "sde_m_08",
+        "question": "What is the difference between 'final', 'finally', and 'finalize' in Java?",
+        "ideal_answer": "'final' is used to define constants or prevent inheritance or method overriding. 'finally' is used for code that should execute after a try-catch block. 'finalize' is a method invoked by the garbage collector before an object is destroyed.",
+        "keywords": ["final", "finally", "finalize", "Java"]
+      },
+      {
+        "id": "sde_m_09",
+        "question": "What is a binary search tree?",
+        "ideal_answer": "A binary search tree is a binary tree in which each node has at most two children, and for every node, the left subtree contains nodes with values less than the node, and the right subtree contains nodes with values greater than the node.",
+        "keywords": ["binary search tree", "BST", "binary tree"]
+      },
+      {
+        "id": "sde_m_10",
+        "question": "Explain the concept of time complexity with an example.",
+        "ideal_answer": "Time complexity is a measure of the amount of time an algorithm takes to run, as a function of the input size. For example, in a linear search, the time complexity is O(n), where n is the number of elements.",
+        "keywords": ["time complexity", "algorithm", "input size"]
+      },
+      {
+        "id": "sde_m_11",
+        "question": "What is the difference between a breadth-first search (BFS) and a depth-first search (DFS)?",
+        "ideal_answer": "BFS explores all neighbors of a node before moving to the next level, while DFS explores as far as possible along a branch before backtracking.",
+        "keywords": ["BFS", "DFS", "search", "graph"]
+      },
+      {
+        "id": "sde_m_12",
+        "question": "What is a deadlock in operating systems?",
+        "ideal_answer": "A deadlock is a situation where two or more processes are unable to proceed because they are each waiting for the other to release a resource.",
+        "keywords": ["deadlock", "operating system", "process"]
+      },
+      {
+        "id": "sde_m_13",
+        "question": "What is the purpose of a stack data structure?",
+        "ideal_answer": "A stack is used to store data in a last-in, first-out (LIFO) order, useful in scenarios like function calls, undo operations, and expression evaluation.",
+        "keywords": ["stack", "data structure", "LIFO"]
+      },
+      {
+        "id": "sde_m_14",
+        "question": "What are the different types of database joins?",
+        "ideal_answer": "The types of joins are INNER JOIN, LEFT JOIN, RIGHT JOIN, and FULL JOIN, which determine how rows from two tables are matched based on a related column.",
+        "keywords": ["joins", "database", "INNER JOIN", "LEFT JOIN"]
+      },
+      {
+        "id": "sde_m_15",
+        "question": "What is the difference between an abstract class and an interface in Java?",
+        "ideal_answer": "An abstract class can have both abstract and concrete methods, and can hold state. An interface can only have abstract methods (before Java 8), and is used to define a contract for implementing classes.",
+        "keywords": ["abstract class", "interface", "Java"]
+      },
+      {
+        "id": "sde_m_16",
+        "question": "What is the difference between a process and a thread?",
+        "ideal_answer": "A process is an independent program in execution, while a thread is a lightweight sub-process that shares resources within a process.",
+        "keywords": ["process", "thread", "execution", "resources"]
+      },
+      {
+        "id": "sde_m_17",
+        "question": "What is normalization in databases?",
+        "ideal_answer": "Normalization is the process of organizing data in a database to minimize redundancy and dependency, typically through a set of rules known as normal forms.",
+        "keywords": ["normalization", "database", "redundancy"]
+      },
+      {
+        "id": "sde_m_18",
+        "question": "What is a linked list?",
+        "ideal_answer": "A linked list is a linear data structure where elements (nodes) are stored in memory, each containing data and a reference to the next node.",
+        "keywords": ["linked list", "data structure", "node"]
+      },
+      {
+        "id": "sde_m_19",
+        "question": "What is the difference between the '==' operator and the 'equals()' method in Java?",
+        "ideal_answer": "The '==' operator compares object references (memory addresses), while the 'equals()' method compares the actual content or state of objects.",
+        "keywords": ["== operator", "equals()", "Java"]
+      },
+      {
+        "id": "sde_m_20",
+        "question": "What is the difference between pass-by-value and pass-by-reference?",
+        "ideal_answer": "In pass-by-value, a copy of the variable is passed, while in pass-by-reference, a reference to the actual variable is passed.",
+        "keywords": ["pass-by-value", "pass-by-reference", "function", "argument"]
+      }
+    ],
+    "hard": [
+      {
+        "id": "sde_h_01",
+        "question": "Design a system like Uber. What key components would you implement?",
+        "ideal_answer": "The system includes user and driver apps, real-time location tracking with GPS, matching algorithm for assigning rides, a pricing engine, trip management, and scalable backend services with high availability using microservices and load balancers.",
+        "keywords": ["system design", "Uber", "scalability", "real-time", "microservices"]
+      },
+      {
+        "id": "sde_h_02",
+        "question": "Explain the time and space complexity of building a Trie and searching in it.",
+        "ideal_answer": "Building a Trie takes O(N * M) time and space, where N is the number of words and M is the average length. Search and insert are O(M).",
+        "keywords": ["Trie", "complexity", "insert", "search", "space"]
+      },
+      {
+        "id": "sde_h_03",
+        "question": "How would you detect a cycle in a directed graph?",
+        "ideal_answer": "Use DFS with recursion stack or apply Kahn's algorithm (topological sort) to detect if all nodes can be processed.",
+        "keywords": ["graph", "cycle detection", "DFS", "Kahn’s algorithm", "topological sort"]
+      },
+      {
+        "id": "sde_h_04",
+        "question": "What’s the difference between optimistic and pessimistic locking?",
+        "ideal_answer": "Optimistic locking assumes conflicts are rare and checks for data integrity before committing. Pessimistic locking assumes conflicts are likely and locks data early.",
+        "keywords": ["locking", "optimistic", "pessimistic", "concurrency"]
+      },
+      {
+        "id": "sde_h_05",
+        "question": "Explain how garbage collection works in Java.",
+        "ideal_answer": "Java uses generational GC which categorizes memory into Young, Old, and Permanent generations, and uses algorithms like mark-and-sweep and stop-the-world to reclaim memory.",
+        "keywords": ["garbage collection", "Java", "heap", "mark-and-sweep"]
+      },
+      {
+        "id": "sde_h_06",
+        "question": "What data structure would you use to implement a LRU cache?",
+        "ideal_answer": "A combination of a doubly linked list and a hash map to achieve O(1) time complexity for get and put operations.",
+        "keywords": ["LRU cache", "linked list", "hash map", "O(1)"]
+      },
+      {
+        "id": "sde_h_07",
+        "question": "Explain how consistent hashing works and its use cases.",
+        "ideal_answer": "Consistent hashing places nodes on a ring and maps keys to the closest node clockwise, reducing remapping during node changes. Used in distributed caching and load balancing.",
+        "keywords": ["consistent hashing", "distributed systems", "ring", "load balancing"]
+      },
+      {
+        "id": "sde_h_08",
+        "question": "How do you prevent race conditions in multithreaded applications?",
+        "ideal_answer": "Use synchronization primitives like locks, semaphores, atomic variables, or concurrent data structures to manage access to shared resources.",
+        "keywords": ["race condition", "multithreading", "synchronization", "locks"]
+      },
+      {
+        "id": "sde_h_09",
+        "question": "What is memoization and how is it different from dynamic programming?",
+        "ideal_answer": "Memoization is a top-down approach using recursion with caching. Dynamic programming is bottom-up and builds solutions iteratively.",
+        "keywords": ["memoization", "dynamic programming", "recursion", "caching"]
+      },
+      {
+        "id": "sde_h_10",
+        "question": "How would you design a rate limiter?",
+        "ideal_answer": "Use algorithms like Token Bucket or Leaky Bucket, and data structures like sliding windows to track and restrict request rates per user/IP.",
+        "keywords": ["rate limiting", "token bucket", "sliding window", "API"]
+      },
+      {
+        "id": "sde_h_11",
+        "question": "What’s the difference between deep copy and shallow copy?",
+        "ideal_answer": "Shallow copy copies references; deep copy copies the actual objects recursively, creating independent objects.",
+        "keywords": ["deep copy", "shallow copy", "object references"]
+      },
+      {
+        "id": "sde_h_12",
+        "question": "How would you find the intersection of two linked lists?",
+        "ideal_answer": "Use two pointers traversing both lists; when one reaches the end, switch it to the other list. They’ll meet at the intersection point or null.",
+        "keywords": ["linked list", "intersection", "two pointers"]
+      },
+      {
+        "id": "sde_h_13",
+        "question": "What are the advantages of using immutability in your code?",
+        "ideal_answer": "Immutability leads to thread-safety, easier debugging, predictable behavior, and no unintended side effects.",
+        "keywords": ["immutability", "thread safety", "predictability"]
+      },
+      {
+        "id": "sde_h_14",
+        "question": "What is the difference between REST and gRPC?",
+        "ideal_answer": "REST is HTTP/JSON-based and human-readable. gRPC uses HTTP/2 and Protocol Buffers, offering better performance and built-in streaming support.",
+        "keywords": ["REST", "gRPC", "protocol buffers", "HTTP/2", "API"]
+      },
+      {
+        "id": "sde_h_15",
+        "question": "How does a Bloom filter work?",
+        "ideal_answer": "A Bloom filter is a probabilistic data structure using multiple hash functions and a bit array to check set membership with false positives but no false negatives.",
+        "keywords": ["Bloom filter", "probabilistic", "hash", "membership test"]
+      },
+      {
+        "id": "sde_h_16",
+        "question": "Explain tail recursion. Why is it important?",
+        "ideal_answer": "Tail recursion is when the recursive call is the last operation in a function. It allows optimization by reusing the same stack frame, preventing stack overflow.",
+        "keywords": ["tail recursion", "optimization", "stack frame"]
+      },
+      {
+        "id": "sde_h_17",
+        "question": "Design a URL shortening service like Bit.ly.",
+        "ideal_answer": "Include components like a hash generator, database for mappings, caching layer, and scalable backend. Use base62 encoding for short URLs.",
+        "keywords": ["URL shortener", "system design", "base62", "hash", "cache"]
+      },
+      {
+        "id": "sde_h_18",
+        "question": "How would you handle large-scale log processing?",
+        "ideal_answer": "Use distributed systems like Kafka for ingestion, Spark for real-time processing, and store results in a scalable database like Cassandra or Elasticsearch.",
+        "keywords": ["log processing", "Kafka", "Spark", "distributed"]
+      },
+      {
+        "id": "sde_h_19",
+        "question": "Explain CAP theorem with an example.",
+        "ideal_answer": "CAP states a distributed system can only guarantee two of Consistency, Availability, and Partition Tolerance at the same time. For example, Cassandra prefers Availability and Partition Tolerance.",
+        "keywords": ["CAP theorem", "distributed", "consistency", "availability", "partition"]
+      },
+      {
+        "id": "sde_h_20",
+        "question": "What are Monads in functional programming?",
+        "ideal_answer": "A Monad is a design pattern that represents computations as a series of steps. It wraps values and provides operations like `bind` to chain computations.",
+        "keywords": ["monad", "functional programming", "bind", "composition"]
+      }
+    ]
+  }
+}
