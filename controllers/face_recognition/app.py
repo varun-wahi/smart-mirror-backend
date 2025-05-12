@@ -192,7 +192,7 @@ def start_camera():
 
     print("[INFO] Starting camera subprocess...")
     command = (
-        "libcamera-vid -t 0 --width 640 --height 480 --framerate 30 --codec yuv420 --output - | "
+        "libcamera-vid --nopreview -t 0 --width 640 --height 480 --framerate 30 --codec yuv420 --output - | "
         "ffmpeg -f rawvideo -pix_fmt yuv420p -s 640x480 -i - -f v4l2 -pix_fmt yuv420p /dev/video10"
     )
     camera_process = subprocess.Popen(command, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
