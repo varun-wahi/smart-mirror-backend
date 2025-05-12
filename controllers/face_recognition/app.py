@@ -13,6 +13,20 @@ import subprocess
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
 
+# GPIO Pins
+LED_PIN = 27
+IR_PIN = 17
+
+# Initialize components
+led = LED(LED_PIN)
+ir_sensor = Button(IR_PIN, pull_up=False)
+
+# Track LED state
+led_state = False
+
+# Lock for thread safety
+state_lock = threading.Lock()
+
 # Global variables
 known_face_encodings = []
 known_face_names = []
@@ -266,6 +280,40 @@ def speak_text():
         return jsonify({'success': True, 'message': 'Speech completed'})
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)}), 500
+    
+def toggle_led():
+    global led_state
+    with state_lock:
+        led_state = not led_state
+        led.value = led_state
+        print(f"[IR SENSOR] Hand detected. LED is now {'ON' if led_state else 'OFF'}.")
+
+def start_ir_listener():
+    """Runs in the background to handle IR sensor detection."""
+    ir_sensor.when_pressed = toggle_led
+    print("[INFO] IR sensor listener started.")
+
+@app.route('/led/on', methods=['POST'])
+def turn_led_on():
+    global led_state
+    with state_lock:
+        led.on()
+        led_state = True
+    return jsonify({'success': True, 'message': 'LED turned ON'})
+
+@app.route('/led/off', methods=['POST'])
+def turn_led_off():
+    global led_state
+    with state_lock:
+        led.off()
+        led_state = False
+    return jsonify({'success': True, 'message': 'LED turned OFF'})
+
+@app.route('/led/status', methods=['GET'])
+def get_led_status():
+    return jsonify({'led_on': led_state})
+
+
 if __name__ == '__main__':
     # Directory containing face images
     faces_directory = "./controllers/face_recognition/faces"  # Change this to your directory
