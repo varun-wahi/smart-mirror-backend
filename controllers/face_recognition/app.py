@@ -249,6 +249,16 @@ def turn_led_off():
 def get_led_status():
     return jsonify({'led_on': led_state})
 
+
+
+@app.route('/shutdown', methods=['POST'])
+def shutdown():
+    os.system("sudo shutdown now")
+    return jsonify({"status": "Shutting down..."})
+
+
+
+
 def toggle_led():
     global led_state
     with state_lock:
