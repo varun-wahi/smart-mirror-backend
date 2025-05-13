@@ -53,7 +53,7 @@ CREDENTIALS_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "cre
 ALTERNATIVE_CREDENTIAL_PATHS = [
     "./credentials.json",
     "../credentials.json",
-    "/home/pi/credentials.json"  # Adjust for your username if not pi
+    "/home/smartmirror/Desktop/SmartMirror/backend/controllers/face_recognition/credentials.json"  # Adjust for your username if not pi
 ]
 
 # Telegram configuration
