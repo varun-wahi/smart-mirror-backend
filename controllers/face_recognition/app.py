@@ -9,10 +9,14 @@ from flask_cors import CORS
 import time
 import base64
 import subprocess
-from gpiozero import LED, Button
 import threading
 import atexit
 import signal
+import datetime
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
+import requests
+from gpiozero import LED, Button
 
 app = Flask(__name__)
 CORS(app)
@@ -30,6 +34,10 @@ state_lock = threading.Lock()
 led_state = False
 camera_process = None
 
+# Text-to-speech process management
+speech_lock = threading.Lock()
+current_speech_process = None
+
 # Global face data
 known_face_encodings = []
 known_face_names = []
@@ -37,8 +45,104 @@ last_recognized_person = None
 last_recognition_time = 0
 recognition_cooldown = 5  # seconds
 
+# Google Sheets configuration
+SPREADSHEET_NAME = "Attendance Log"
+CREDENTIALS_FILE = "credentials.json"  # Google API credentials file
+
+# Telegram configuration
+TELEGRAM_BOT_TOKEN = "8126908772:AAHLwYm7eQn0s53rIRtA_nVotTqPImJbXtA"  # Replace with your bot token
+TELEGRAM_GROUP_ID = "-4786736575"    # Replace with your group ID
+SPREADSHEET_URL = "https://docs.google.com/spreadsheets/d/14v-KCOdJa5uTtVfaqriX4CanhTvJykTPDYL0bJ05LuY/edit?usp=sharing"  # Replace with your shared Google Sheet URL
+
+# Initialize Google Sheets API
+def init_google_sheets():
+    try:
+        scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
+        credentials = ServiceAccountCredentials.from_json_keyfile_name(CREDENTIALS_FILE, scope)
+        client = gspread.authorize(credentials)
+        
+        # Try to open existing spreadsheet, create if it doesn't exist
+        try:
+            spreadsheet = client.open(SPREADSHEET_NAME)
+        except gspread.SpreadsheetNotFound:
+            spreadsheet = client.create(SPREADSHEET_NAME)
+            # Share the spreadsheet with a specific email (optional)
+            # spreadsheet.share('example@email.com', perm_type='user', role='writer')
+        
+        # Get or create the worksheet
+        try:
+            worksheet = spreadsheet.worksheet("Attendance")
+        except gspread.WorksheetNotFound:
+            worksheet = spreadsheet.add_worksheet(title="Attendance", rows=1000, cols=4)
+            # Add headers
+            worksheet.update('A1:D1', [['Name', 'Date', 'Time', 'Status']])
+        
+        print(f"[SHEETS] Google Sheets initialized successfully")
+        return client
+    except Exception as e:
+        print(f"[SHEETS] Error initializing Google Sheets: {e}")
+        return None
+
+# Google Sheets client
+sheets_client = None
+
+def log_attendance(name):
+    """Log attendance to Google Sheets"""
+    global sheets_client
+    
+    if not sheets_client:
+        print("[SHEETS] Sheets client not initialized")
+        return False
+    
+    try:
+        now = datetime.datetime.now()
+        date_str = now.strftime("%Y-%m-%d")
+        time_str = now.strftime("%H:%M:%S")
+        
+        # Open spreadsheet and worksheet
+        spreadsheet = sheets_client.open(SPREADSHEET_NAME)
+        worksheet = spreadsheet.worksheet("Attendance")
+        
+        # Add new row with attendance data
+        worksheet.append_row([name, date_str, time_str, "Present"])
+        print(f"[SHEETS] Logged attendance for {name}")
+        return True
+    except Exception as e:
+        print(f"[SHEETS] Error logging attendance: {e}")
+        return False
+
+def send_telegram_notification(name, image_bytes=None):
+    """Send notification to Telegram group"""
+    try:
+        message = f"✅ Attendance logged successfully!\n\n👤 Name: {name}\n🕒 Time: {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n📊 Attendance sheet: {SPREADSHEET_URL}"
+        
+        # Send text message
+        text_url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
+        text_params = {
+            "chat_id": TELEGRAM_GROUP_ID,
+            "text": message,
+            "parse_mode": "HTML"
+        }
+        text_response = requests.post(text_url, data=text_params)
+        
+        # Send photo if available
+        if image_bytes:
+            photo_url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendPhoto"
+            files = {"photo": ("person.jpg", image_bytes)}
+            photo_params = {
+                "chat_id": TELEGRAM_GROUP_ID,
+                "caption": f"Recognized: {name}"
+            }
+            photo_response = requests.post(photo_url, data=photo_params, files=files)
+        
+        print(f"[TELEGRAM] Notification sent for {name}")
+        return True
+    except Exception as e:
+        print(f"[TELEGRAM] Error sending notification: {e}")
+        return False
+
 def cleanup():
-    global camera_process
+    global camera_process, current_speech_process
     print("[CLEANUP] Cleaning up resources...")
 
     try:
@@ -54,6 +158,14 @@ def cleanup():
             print("[CLEANUP] Camera subprocess terminated.")
     except Exception as e:
         print(f"[CLEANUP] Failed to terminate camera subprocess: {e}")
+        
+    try:
+        with speech_lock:
+            if current_speech_process and current_speech_process.poll() is None:
+                current_speech_process.terminate()
+                print("[CLEANUP] Speech process terminated.")
+    except Exception as e:
+        print(f"[CLEANUP] Failed to terminate speech process: {e}")
 
 atexit.register(cleanup)
 
@@ -104,17 +216,18 @@ def process_frame(frame):
 
     try:
         if not known_face_encodings:
-            return None, frame
+            return None, frame, None
 
         small_frame = cv2.resize(frame, (0, 0), fx=0.25, fy=0.25)
         rgb_small_frame = cv2.cvtColor(small_frame, cv2.COLOR_BGR2RGB)
         face_locations = face_recognition.face_locations(rgb_small_frame)
 
         if not face_locations:
-            return None, frame
+            return None, frame, None
 
         face_encodings = face_recognition.face_encodings(rgb_small_frame, face_locations)
         recognized_person = None
+        face_image = None
         current_time = time.time()
 
         for (top, right, bottom, left), face_encoding in zip(face_locations, face_encodings):
@@ -136,16 +249,19 @@ def process_frame(frame):
                         recognized_person = name
                         last_recognized_person = name
                         last_recognition_time = current_time
+                        
+                        # Capture face image for notification
+                        face_image = frame[top:bottom, left:right].copy()
 
             cv2.rectangle(frame, (left, top), (right, bottom), (0, 0, 255), 2)
             cv2.rectangle(frame, (left, bottom - 35), (right, bottom), (0, 0, 255), cv2.FILLED)
             cv2.putText(frame, name, (left + 6, bottom - 6), cv2.FONT_HERSHEY_DUPLEX, 0.8, (255, 255, 255), 1)
 
-        return recognized_person, frame
+        return recognized_person, frame, face_image
 
     except Exception as e:
         print("Error in process_frame:", e)
-        return None, frame
+        return None, frame, None
 
 def generate_frames():
     try:
@@ -160,7 +276,12 @@ def generate_frames():
                 print("Failed to grab frame from webcam")
                 break
 
-            _, processed_frame = process_frame(frame)
+            recognized_person, processed_frame, face_image = process_frame(frame)
+            
+            # If person recognized, log attendance and send notification
+            if recognized_person:
+                threading.Thread(target=handle_recognition, args=(recognized_person, face_image)).start()
+                
             ret, buffer = cv2.imencode('.jpg', processed_frame)
             frame_bytes = buffer.tobytes()
 
@@ -168,6 +289,60 @@ def generate_frames():
                    b'Content-Type: image/jpeg\r\n\r\n' + frame_bytes + b'\r\n')
     except Exception as e:
         print("Error in generate_frames:", e)
+
+def handle_recognition(name, face_image):
+    """Handle recognition event - log attendance and send notification"""
+    try:
+        # Log attendance to Google Sheets
+        success = log_attendance(name)
+        
+        # Send Telegram notification
+        if success and face_image is not None:
+            _, img_encoded = cv2.imencode('.jpg', face_image)
+            img_bytes = img_encoded.tobytes()
+            send_telegram_notification(name, img_bytes)
+        
+        # Welcome message using improved TTS
+        welcome_message = f"Welcome {name}. Your attendance has been logged successfully."
+        speak_improved(welcome_message)
+    except Exception as e:
+        print(f"Error handling recognition: {e}")
+
+def speak_improved(text):
+    """Speak text with improved natural-sounding voice"""
+    global current_speech_process
+    
+    with speech_lock:
+        # Stop any current speech
+        if current_speech_process and current_speech_process.poll() is None:
+            current_speech_process.terminate()
+            try:
+                current_speech_process.wait(timeout=1)
+            except:
+                pass
+        
+        # Use pico2wave for more natural sounding speech
+        try:
+            # Try with pico2wave if available
+            temp_file = "/tmp/speech.wav"
+            current_speech_process = subprocess.Popen(
+                ["pico2wave", "-w", temp_file, text],
+                stdout=subprocess.DEVNULL, 
+                stderr=subprocess.DEVNULL
+            )
+            current_speech_process.wait()
+            current_speech_process = subprocess.Popen(
+                ["aplay", temp_file],
+                stdout=subprocess.DEVNULL, 
+                stderr=subprocess.DEVNULL
+            )
+        except Exception:
+            # Fall back to espeak with improved settings
+            current_speech_process = subprocess.Popen(
+                ["espeak", "-s", "130", "-p", "50", "-a", "150", "-g", "10", text],
+                stdout=subprocess.DEVNULL, 
+                stderr=subprocess.DEVNULL
+            )
 
 @app.route('/video_feed')
 def video_feed():
@@ -210,8 +385,10 @@ def upload_image():
         nparr = np.frombuffer(image_bytes, np.uint8)
         img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
 
-        recognized_person, _ = process_frame(img)
+        recognized_person, _, face_image = process_frame(img)
         if recognized_person:
+            # Handle recognition in background thread
+            threading.Thread(target=handle_recognition, args=(recognized_person, face_image)).start()
             return jsonify({'recognized': True, 'name': recognized_person})
         else:
             return jsonify({'recognized': False, 'message': 'No person recognized'})
@@ -224,8 +401,8 @@ def speak_text():
     try:
         data = request.json
         text = data.get('text', 'Welcome')
-        subprocess.run(['espeak', '-s', '130', text])
-        return jsonify({'success': True, 'message': 'Speech completed'})
+        speak_improved(text)
+        return jsonify({'success': True, 'message': 'Speech queued'})
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)}), 500
 
@@ -249,8 +426,6 @@ def turn_led_off():
 def get_led_status():
     return jsonify({'led_on': led_state})
 
-
-
 @app.route('/shutdown', methods=['POST'])
 def shutdown():
     os.system("sudo shutdown now")
@@ -260,8 +435,6 @@ def shutdown():
 def reboot():
     os.system("sudo reboot now")
     return jsonify({"status": "Rebooting..."})
-
-
 
 def toggle_led():
     global led_state
@@ -281,6 +454,10 @@ if __name__ == '__main__':
 
     if not known_face_encodings:
         print("[WARN] No faces loaded. Recognition will not work.")
+
+    # Initialize Google Sheets
+    print("[BOOT] Initializing Google Sheets...")
+    sheets_client = init_google_sheets()
 
     threading.Thread(target=start_ir_listener, daemon=True).start()
 
