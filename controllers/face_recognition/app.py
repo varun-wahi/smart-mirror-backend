@@ -192,20 +192,6 @@ def send_telegram_notification(name, image_bytes=None):
             print(f"[TELEGRAM] Error sending text message: {text_response.text}")
             return False
             
-        # Send photo if available
-        if image_bytes:
-            print("[TELEGRAM] Sending photo")
-            photo_url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendPhoto"
-            files = {"photo": ("person.jpg", image_bytes)}
-            photo_params = {
-                "chat_id": TELEGRAM_GROUP_ID,
-                "caption": f"Recognized: {name}"
-            }
-            photo_response = requests.post(photo_url, data=photo_params, files=files)
-            
-            if photo_response.status_code != 200:
-                print(f"[TELEGRAM] Error sending photo: {photo_response.text}")
-                # We still return True because the text message was sent
         
         print(f"[TELEGRAM] Notification sent for {name}")
         return True
