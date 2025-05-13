@@ -47,24 +47,59 @@ recognition_cooldown = 5  # seconds
 
 # Google Sheets configuration
 SPREADSHEET_NAME = "Attendance Log"
-CREDENTIALS_FILE = "credentials.json"  # Google API credentials file
+# Use absolute path for credentials file
+CREDENTIALS_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "credentials.json")
+# Alternative locations to search for credentials file
+ALTERNATIVE_CREDENTIAL_PATHS = [
+    "./credentials.json",
+    "../credentials.json",
+    "/home/pi/credentials.json"  # Adjust for your username if not pi
+]
 
 # Telegram configuration
-TELEGRAM_BOT_TOKEN = "8126908772:AAHLwYm7eQn0s53rIRtA_nVotTqPImJbXtA"  # Replace with your bot token
-TELEGRAM_GROUP_ID = "-4786736575"    # Replace with your group ID
-SPREADSHEET_URL = "https://docs.google.com/spreadsheets/d/14v-KCOdJa5uTtVfaqriX4CanhTvJykTPDYL0bJ05LuY/edit?usp=sharing"  # Replace with your shared Google Sheet URL
+TELEGRAM_BOT_TOKEN = "YOUR_BOT_TOKEN"  # Replace with your bot token
+TELEGRAM_GROUP_ID = "YOUR_GROUP_ID"    # Replace with your group ID
+SPREADSHEET_URL = "YOUR_SPREADSHEET_URL"  # Replace with your shared Google Sheet URL
 
 # Initialize Google Sheets API
 def init_google_sheets():
+    global CREDENTIALS_FILE
+    
+    # Try to find credentials file
+    credentials_found = False
+    if os.path.exists(CREDENTIALS_FILE):
+        credentials_found = True
+        print(f"[SHEETS] Found credentials file at: {CREDENTIALS_FILE}")
+    else:
+        # Try alternative paths
+        print(f"[SHEETS] Credentials not found at {CREDENTIALS_FILE}, trying alternatives...")
+        for alt_path in ALTERNATIVE_CREDENTIAL_PATHS:
+            if os.path.exists(alt_path):
+                CREDENTIALS_FILE = alt_path
+                credentials_found = True
+                print(f"[SHEETS] Found credentials file at alternative path: {CREDENTIALS_FILE}")
+                break
+    
+    if not credentials_found:
+        print(f"[SHEETS] ERROR: Credentials file not found. Looked in:")
+        print(f"  - {CREDENTIALS_FILE}")
+        for path in ALTERNATIVE_CREDENTIAL_PATHS:
+            print(f"  - {path}")
+        print("[SHEETS] Attendance logging will be disabled.")
+        return None
+    
     try:
         scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
+        print(f"[SHEETS] Loading credentials from: {CREDENTIALS_FILE}")
         credentials = ServiceAccountCredentials.from_json_keyfile_name(CREDENTIALS_FILE, scope)
         client = gspread.authorize(credentials)
         
         # Try to open existing spreadsheet, create if it doesn't exist
         try:
             spreadsheet = client.open(SPREADSHEET_NAME)
+            print(f"[SHEETS] Opened existing spreadsheet: {SPREADSHEET_NAME}")
         except gspread.SpreadsheetNotFound:
+            print(f"[SHEETS] Creating new spreadsheet: {SPREADSHEET_NAME}")
             spreadsheet = client.create(SPREADSHEET_NAME)
             # Share the spreadsheet with a specific email (optional)
             # spreadsheet.share('example@email.com', perm_type='user', role='writer')
@@ -72,7 +107,9 @@ def init_google_sheets():
         # Get or create the worksheet
         try:
             worksheet = spreadsheet.worksheet("Attendance")
+            print("[SHEETS] Found existing worksheet: Attendance")
         except gspread.WorksheetNotFound:
+            print("[SHEETS] Creating new worksheet: Attendance")
             worksheet = spreadsheet.add_worksheet(title="Attendance", rows=1000, cols=4)
             # Add headers
             worksheet.update('A1:D1', [['Name', 'Date', 'Time', 'Status']])
@@ -81,6 +118,8 @@ def init_google_sheets():
         return client
     except Exception as e:
         print(f"[SHEETS] Error initializing Google Sheets: {e}")
+        if "invalid_grant" in str(e).lower():
+            print("[SHEETS] Authentication error - check if your credentials.json is valid and not expired")
         return None
 
 # Google Sheets client
@@ -91,7 +130,7 @@ def log_attendance(name):
     global sheets_client
     
     if not sheets_client:
-        print("[SHEETS] Sheets client not initialized")
+        print("[SHEETS] Sheets client not initialized, cannot log attendance")
         return False
     
     try:
@@ -100,23 +139,47 @@ def log_attendance(name):
         time_str = now.strftime("%H:%M:%S")
         
         # Open spreadsheet and worksheet
-        spreadsheet = sheets_client.open(SPREADSHEET_NAME)
-        worksheet = spreadsheet.worksheet("Attendance")
-        
-        # Add new row with attendance data
-        worksheet.append_row([name, date_str, time_str, "Present"])
-        print(f"[SHEETS] Logged attendance for {name}")
-        return True
+        try:
+            spreadsheet = sheets_client.open(SPREADSHEET_NAME)
+            worksheet = spreadsheet.worksheet("Attendance")
+            
+            # Add new row with attendance data
+            worksheet.append_row([name, date_str, time_str, "Present"])
+            print(f"[SHEETS] Logged attendance for {name}")
+            return True
+        except gspread.exceptions.APIError as api_error:
+            print(f"[SHEETS] Google Sheets API error: {api_error}")
+            # Try to refresh the client if token expired
+            if "invalid_grant" in str(api_error).lower() or "unauthorized" in str(api_error).lower():
+                print("[SHEETS] Attempting to reinitialize Google Sheets client...")
+                sheets_client = init_google_sheets()
+                if sheets_client:
+                    # Try again once
+                    spreadsheet = sheets_client.open(SPREADSHEET_NAME)
+                    worksheet = spreadsheet.worksheet("Attendance")
+                    worksheet.append_row([name, date_str, time_str, "Present"])
+                    print(f"[SHEETS] Logged attendance for {name} after reinitializing")
+                    return True
+            return False
     except Exception as e:
         print(f"[SHEETS] Error logging attendance: {e}")
         return False
 
 def send_telegram_notification(name, image_bytes=None):
     """Send notification to Telegram group"""
+    if TELEGRAM_BOT_TOKEN == "YOUR_BOT_TOKEN" or TELEGRAM_GROUP_ID == "YOUR_GROUP_ID":
+        print("[TELEGRAM] Bot token or group ID not configured")
+        return False
+        
     try:
-        message = f"✅ Attendance logged successfully!\n\n👤 Name: {name}\n🕒 Time: {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n📊 Attendance sheet: {SPREADSHEET_URL}"
+        message = f"✅ Attendance logged successfully!\n\n👤 Name: {name}\n🕒 Time: {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
+        
+        # Add spreadsheet link if available
+        if SPREADSHEET_URL != "YOUR_SPREADSHEET_URL":
+            message += f"\n\n📊 Attendance sheet: {SPREADSHEET_URL}"
         
         # Send text message
+        print(f"[TELEGRAM] Sending message to group {TELEGRAM_GROUP_ID}")
         text_url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
         text_params = {
             "chat_id": TELEGRAM_GROUP_ID,
@@ -125,8 +188,13 @@ def send_telegram_notification(name, image_bytes=None):
         }
         text_response = requests.post(text_url, data=text_params)
         
+        if text_response.status_code != 200:
+            print(f"[TELEGRAM] Error sending text message: {text_response.text}")
+            return False
+            
         # Send photo if available
         if image_bytes:
+            print("[TELEGRAM] Sending photo")
             photo_url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendPhoto"
             files = {"photo": ("person.jpg", image_bytes)}
             photo_params = {
@@ -134,6 +202,10 @@ def send_telegram_notification(name, image_bytes=None):
                 "caption": f"Recognized: {name}"
             }
             photo_response = requests.post(photo_url, data=photo_params, files=files)
+            
+            if photo_response.status_code != 200:
+                print(f"[TELEGRAM] Error sending photo: {photo_response.text}")
+                # We still return True because the text message was sent
         
         print(f"[TELEGRAM] Notification sent for {name}")
         return True
@@ -293,20 +365,45 @@ def generate_frames():
 def handle_recognition(name, face_image):
     """Handle recognition event - log attendance and send notification"""
     try:
-        # Log attendance to Google Sheets
-        success = log_attendance(name)
+        print(f"[RECOGNITION] Handling recognition for {name}")
         
-        # Send Telegram notification
-        if success and face_image is not None:
-            _, img_encoded = cv2.imencode('.jpg', face_image)
-            img_bytes = img_encoded.tobytes()
-            send_telegram_notification(name, img_bytes)
+        # Log attendance to Google Sheets
+        attendance_logged = log_attendance(name)
+        if attendance_logged:
+            print(f"[RECOGNITION] Successfully logged attendance for {name}")
+        else:
+            print(f"[RECOGNITION] Failed to log attendance for {name}")
+        
+        # Send Telegram notification if bot token and group ID are configured
+        telegram_sent = False
+        if TELEGRAM_BOT_TOKEN != "YOUR_BOT_TOKEN" and TELEGRAM_GROUP_ID != "YOUR_GROUP_ID":
+            if face_image is not None:
+                _, img_encoded = cv2.imencode('.jpg', face_image)
+                img_bytes = img_encoded.tobytes()
+                telegram_sent = send_telegram_notification(name, img_bytes)
+            else:
+                telegram_sent = send_telegram_notification(name)
+                
+            if telegram_sent:
+                print(f"[TELEGRAM] Successfully sent notification for {name}")
+            else:
+                print(f"[TELEGRAM] Failed to send notification for {name}")
+        else:
+            print("[TELEGRAM] Bot token or group ID not configured, skipping notification")
         
         # Welcome message using improved TTS
         welcome_message = f"Welcome {name}. Your attendance has been logged successfully."
+        if attendance_logged:
+            if telegram_sent:
+                welcome_message += " Notification has been sent."
         speak_improved(welcome_message)
     except Exception as e:
-        print(f"Error handling recognition: {e}")
+        print(f"[RECOGNITION] Error handling recognition: {e}")
+        # Try to speak a simple message even if other steps failed
+        try:
+            speak_improved(f"Welcome {name}.")
+        except:
+            pass
 
 def speak_improved(text):
     """Speak text with improved natural-sounding voice"""
@@ -458,6 +555,17 @@ if __name__ == '__main__':
     # Initialize Google Sheets
     print("[BOOT] Initializing Google Sheets...")
     sheets_client = init_google_sheets()
+    
+    if sheets_client:
+        print("[BOOT] Google Sheets initialized successfully")
+    else:
+        print("[WARN] Google Sheets initialization failed. Attendance logging will be disabled.")
+    
+    # Check Telegram configuration
+    if TELEGRAM_BOT_TOKEN == "YOUR_BOT_TOKEN" or TELEGRAM_GROUP_ID == "YOUR_GROUP_ID":
+        print("[WARN] Telegram configuration not set. Notifications will be disabled.")
+    else:
+        print("[BOOT] Telegram configuration detected")
 
     threading.Thread(target=start_ir_listener, daemon=True).start()
 
