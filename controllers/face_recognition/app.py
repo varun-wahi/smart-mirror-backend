@@ -58,7 +58,7 @@ ALTERNATIVE_CREDENTIAL_PATHS = [
 
 # Telegram configuration
 TELEGRAM_BOT_TOKEN = "YOUR_BOT_TOKEN"  # Replace with your bot token
-TELEGRAM_GROUP_ID = "YOUR_GROUP_ID"    # Replace with your group ID
+TELEGRAM_GROUP_ID = "-4786736575"    # Replace with your group ID
 SPREADSHEET_URL = "YOUR_SPREADSHEET_URL"  # Replace with your shared Google Sheet URL
 
 # Initialize Google Sheets API
